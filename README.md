@@ -1,6 +1,6 @@
 # ecommerce
 
-A new Flutter project.
+In develop
 
 ## Getting Started
 
