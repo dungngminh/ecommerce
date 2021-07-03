@@ -1,5 +1,5 @@
-import 'package:ecommerece/provider/dark_theme_provider.dart';
-import 'package:ecommerece/utils/constant.dart';
+import 'package:ecommerce/provider/dark_theme_provider.dart';
+import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,6 @@
-import 'package:ecommerece/provider/dark_theme_provider.dart';
-import 'package:ecommerece/utils/constant.dart';
-import 'package:ecommerece/widget/bottombar.dart';
+import 'package:ecommerce/provider/dark_theme_provider.dart';
+import 'package:ecommerce/utils/constant.dart';
+import 'package:ecommerce/widget/bottombar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
       child: Consumer<DarkThemeProvider>(
         builder: (context, theme, child) {
           return MaterialApp(
-            title: "Ecommerece",
+            title: "ecommerce",
             theme: themeData(theme.darkTheme, context),
             debugShowCheckedModeBanner: false,
             home: BottomBarScreen(),

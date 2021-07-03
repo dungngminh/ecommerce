@@ -1,4 +1,4 @@
-import 'package:ecommerece/utils/constant.dart';
+import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 

@@ -1,4 +1,4 @@
-import 'package:ecommerece/provider/dark_theme_provider.dart';
+import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:provider/provider.dart';

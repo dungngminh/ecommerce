@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(ecommerece LANGUAGES CXX)
+project(ecommerce LANGUAGES CXX)
 
-set(BINARY_NAME "ecommerece")
+set(BINARY_NAME "ecommerce")
 
 cmake_policy(SET CMP0063 NEW)
 

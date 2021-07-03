@@ -1,9 +1,9 @@
-import 'package:ecommerece/screens/cart.dart';
-import 'package:ecommerece/screens/feeds.dart';
-import 'package:ecommerece/screens/home.dart';
-import 'package:ecommerece/screens/search.dart';
-import 'package:ecommerece/screens/user.dart';
-import 'package:ecommerece/utils/constant.dart';
+import 'package:ecommerce/screens/cart.dart';
+import 'package:ecommerce/screens/feeds.dart';
+import 'package:ecommerce/screens/home.dart';
+import 'package:ecommerce/screens/search.dart';
+import 'package:ecommerce/screens/user.dart';
+import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class BottomBarScreen extends StatefulWidget {
