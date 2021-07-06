@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
 class FeedsProduct extends StatefulWidget {
@@ -22,19 +23,39 @@ class _FeedsProductState extends State<FeedsProduct> {
         ),
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(2),
-              child: Container(
-                width: double.infinity,
-                constraints: BoxConstraints(
-                  minHeight: 100,
-                  maxHeight: size.height * 0.3,
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(2),
+                  child: Container(
+                    width: double.infinity,
+                    constraints: BoxConstraints(
+                      minHeight: 100,
+                      maxHeight: size.height * 0.3,
+                    ),
+                    child: Image.network(
+                      'https://nguyencongpc.vn/photos/17/ASUS-Gaming-ROG-Zephyrus-GA401II-HE019T-4.jpg',
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
                 ),
-                child: Image.network(
-                  'https://nguyencongpc.vn/photos/17/ASUS-Gaming-ROG-Zephyrus-GA401II-HE019T-4.jpg',
-                  fit: BoxFit.fitWidth,
+                Badge(
+                  //want to change location of badge ? wrap it with Align or Postioned
+                  toAnimate: true,
+                  animationType: BadgeAnimationType.scale,
+                  shape: BadgeShape.square,
+                  badgeColor: Colors.deepPurple,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(8),
+                  ),
+                  badgeContent: Text(
+                    'New',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             Container(
               padding: EdgeInsets.only(left: 5),
