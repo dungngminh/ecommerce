@@ -25,14 +25,13 @@ Color darkGrey = Color.fromRGBO(18, 18, 18, 1);
 //ThemeData
 ThemeData themeData(bool isDarkMode, BuildContext context) {
   return ThemeData(
-    scaffoldBackgroundColor: isDarkMode ? darkGrey : Colors.grey[200],
+    scaffoldBackgroundColor: isDarkMode ? darkGrey : Colors.grey[100],
     primaryColor: isDarkMode ? 'bb86fc'.toColor() : '6200ee'.toColor(),
     accentColor: isDarkMode ? darkGrey : '6200ee'.toColor(),
     backgroundColor: isDarkMode ? darkGrey : kwhite,
     indicatorColor: isDarkMode ? Color(0XFF0E1D36) : Color(0XFFF1F5F8),
     buttonColor: isDarkMode ? Color(0xFF3B3B3B) : Color(0xFFF1F5FB),
     hintColor: isDarkMode ? Colors.grey.shade300 : Colors.grey.shade800,
-    highlightColor: isDarkMode ? Color(0xFF372901) : Color(0xFFFCE192),
     hoverColor: isDarkMode ? Color(0xFF3a3a3b) : Color(0xFF4285F4),
     focusColor: isDarkMode ? Color(0xFF0B2512) : Color(0xFFa8DAB5),
     disabledColor: Colors.grey,

@@ -1,4 +1,4 @@
-import 'package:ecommerce/models/settings.dart';
+import 'package:ecommerce/utils/settings.dart';
 import 'package:flutter/material.dart';
 
 class DarkThemeProvider with ChangeNotifier {

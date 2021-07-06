@@ -85,14 +85,15 @@ class _UserScreenState extends State<UserScreen> {
                                         ),
                                       ],
                                       shape: BoxShape.circle,
-                                      image: const DecorationImage(
-                                          image: NetworkImage(
-                                              'https://image.flaticon.com/icons/png/512/2037/2037413.png'),
+                                      image: DecorationImage(
+                                          image: Image.asset(
+                                                  'assets/images/komkat.jpg')
+                                              .image,
                                           fit: BoxFit.fill),
                                     ),
                                   ),
                                   Text(
-                                    'Guest',
+                                    'Kom Kat',
                                     style: TextStyle(
                                       fontSize: 20,
                                       color: kwhite,
@@ -103,9 +104,8 @@ class _UserScreenState extends State<UserScreen> {
                             ),
                           ],
                         ),
-                        background: const Image(
-                          image: NetworkImage(
-                              'https://image.flaticon.com/icons/png/512/2037/2037413.png'),
+                        background: Image.asset(
+                          'assets/images/komkat.jpg',
                           fit: BoxFit.cover,
                         ),
                       ),

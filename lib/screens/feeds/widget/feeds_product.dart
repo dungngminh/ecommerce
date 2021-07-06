@@ -33,25 +33,28 @@ class _FeedsProductState extends State<FeedsProduct> {
                       minHeight: 100,
                       maxHeight: size.height * 0.3,
                     ),
-                    child: Image.network(
-                      'https://nguyencongpc.vn/photos/17/ASUS-Gaming-ROG-Zephyrus-GA401II-HE019T-4.jpg',
+                    child: Image.asset(
+                      'assets/images/image_demo/g14.jpg',
                       fit: BoxFit.fitWidth,
                     ),
                   ),
                 ),
-                Badge(
-                  //want to change location of badge ? wrap it with Align or Postioned
-                  toAnimate: true,
-                  animationType: BadgeAnimationType.scale,
-                  shape: BadgeShape.square,
-                  badgeColor: Colors.deepPurple,
-                  borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(8),
-                  ),
-                  badgeContent: const Text(
-                    'New',
-                    style: TextStyle(
-                      color: Colors.white,
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Badge(
+                    //want to change location of badge ? wrap it with Align or Postioned
+                    toAnimate: true,
+                    animationType: BadgeAnimationType.scale,
+                    shape: BadgeShape.square,
+                    badgeColor: Colors.deepPurple,
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(8),
+                    ),
+                    badgeContent: const Text(
+                      'New',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -79,7 +82,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                   const Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
-                      '\$ price',
+                      '\$1299',
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.black,

@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  carousel_slider:
+    dependency: "direct main"
+    description:
+      name: carousel_slider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   characters:
     dependency: transitive
     description:
@@ -90,6 +97,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_card_swipper:
+    dependency: "direct main"
+    description:
+      name: flutter_card_swipper
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:

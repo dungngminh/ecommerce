@@ -1,8 +1,8 @@
-import 'package:ecommerce/screens/cart.dart';
-import 'package:ecommerce/screens/feeds.dart';
-import 'package:ecommerce/screens/home.dart';
-import 'package:ecommerce/screens/search.dart';
-import 'package:ecommerce/screens/user.dart';
+import 'package:ecommerce/screens/cart/cart.dart';
+import 'package:ecommerce/screens/feeds/feeds.dart';
+import 'package:ecommerce/screens/home/home.dart';
+import 'package:ecommerce/screens/search/search.dart';
+import 'package:ecommerce/screens/user/user.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
 

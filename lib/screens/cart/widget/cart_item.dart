@@ -1,15 +1,13 @@
-import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-import 'package:provider/provider.dart';
 
-class CartIem extends StatefulWidget {
+class CartItem extends StatefulWidget {
   @override
-  _CartIemState createState() => _CartIemState();
+  _CartItemState createState() => _CartItemState();
 }
 
-class _CartIemState extends State<CartIem> {
+class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -30,9 +28,7 @@ class _CartIemState extends State<CartIem> {
             width: 130,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(
-                  'https://nguyencongpc.vn/photos/17/ASUS-Gaming-ROG-Zephyrus-GA401II-HE019T-4.jpg',
-                ),
+                image: Image.asset('assets/images/image_demo/g14.jpg').image,
                 fit: BoxFit.contain,
               ),
             ),

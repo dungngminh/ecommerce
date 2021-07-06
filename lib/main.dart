@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
       child: Consumer<DarkThemeProvider>(
         builder: (context, theme, child) {
           return MaterialApp(
-            title: "ecommerce",
+            title: "Ecommerce",
             theme: themeData(theme.darkTheme, context),
             debugShowCheckedModeBanner: false,
             home: BottomBarScreen(),
