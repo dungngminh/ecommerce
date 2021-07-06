@@ -9,10 +9,10 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-  ScrollController _scrollController = ScrollController();
-  var top = 0.0;
+  final ScrollController _scrollController = ScrollController();
+  double top = 0.0;
 
-  List<IconData> _userListTileIcon = [
+  final List<IconData> _userListTileIcon = [
     Icons.email,
     Icons.phone,
     Icons.local_shipping,
@@ -45,6 +45,7 @@ class _UserScreenState extends State<UserScreen> {
             controller: _scrollController,
             slivers: [
               SliverAppBar(
+                backgroundColor: Theme.of(context).primaryColor,
                 automaticallyImplyLeading: false,
                 elevation: 5,
                 expandedHeight: 200,
@@ -53,16 +54,15 @@ class _UserScreenState extends State<UserScreen> {
                   builder: (context, constraints) {
                     top = constraints.biggest.height;
                     return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        // gradient: LinearGradient(
-                        //   begin: Alignment.topRight,
-                        //   end: Alignment.bottomRight,
-                        //   colors: [starterColor, endColor],
-                        //   stops: [0, 1],
-                        //   tileMode: TileMode.clamp,
-                        // ),
-                      ),
+                      decoration: const BoxDecoration(
+                          // gradient: LinearGradient(
+                          //   begin: Alignment.topRight,
+                          //   end: Alignment.bottomRight,
+                          //   colors: [starterColor, endColor],
+                          //   stops: [0, 1],
+                          //   tileMode: TileMode.clamp,
+                          // ),
+                          ),
                       child: FlexibleSpaceBar(
                         collapseMode: CollapseMode.parallax,
                         centerTitle: true,
@@ -70,7 +70,7 @@ class _UserScreenState extends State<UserScreen> {
                           children: [
                             AnimatedOpacity(
                               opacity: top <= 125 ? 1 : 0,
-                              duration: Duration(milliseconds: 200),
+                              duration: const Duration(milliseconds: 200),
                               child: Row(
                                 children: [
                                   Container(
@@ -85,7 +85,7 @@ class _UserScreenState extends State<UserScreen> {
                                         ),
                                       ],
                                       shape: BoxShape.circle,
-                                      image: DecorationImage(
+                                      image: const DecorationImage(
                                           image: NetworkImage(
                                               'https://image.flaticon.com/icons/png/512/2037/2037413.png'),
                                           fit: BoxFit.fill),
@@ -103,7 +103,7 @@ class _UserScreenState extends State<UserScreen> {
                             ),
                           ],
                         ),
-                        background: Image(
+                        background: const Image(
                           image: NetworkImage(
                               'https://image.flaticon.com/icons/png/512/2037/2037413.png'),
                           fit: BoxFit.cover,
@@ -123,7 +123,7 @@ class _UserScreenState extends State<UserScreen> {
                           const EdgeInsets.only(left: 8.0, top: 20, bottom: 5),
                       child: userTile('User Infomation'),
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 1,
                       color: Colors.grey,
                     ),
@@ -136,14 +136,14 @@ class _UserScreenState extends State<UserScreen> {
                           const EdgeInsets.only(left: 8.0, top: 20, bottom: 5),
                       child: userTile('User Setting'),
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 1,
                       color: Colors.grey,
                     ),
                     userListTile('Dark Mode', 'Turn on/off dark mode', 4,
                         isSwitchTitle: true, provider: themeChange),
                     userListTile('Log out', 'Log out', 5),
-                    SizedBox(
+                    const SizedBox(
                       height: 100,
                     ),
                   ],
@@ -160,7 +160,7 @@ class _UserScreenState extends State<UserScreen> {
   Widget userTile(String title) {
     return Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.bold,
       ),
@@ -171,6 +171,7 @@ class _UserScreenState extends State<UserScreen> {
       {bool? isSwitchTitle, DarkThemeProvider? provider}) {
     return (isSwitchTitle != null && provider != null)
         ? SwitchListTile(
+            activeColor: Theme.of(context).primaryColor,
             title: Text(
               title,
             ),
@@ -207,22 +208,23 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   Widget customFAB() {
-    final defaultTopMargin = 200.0 - 4.0;
-    final scaleStart = 160.0;
-    final scaleEnd = scaleStart / 2;
+    const defaultTopMargin = 200.0 - 4.0;
+    const scaleStart = 160.0;
+    const scaleEnd = scaleStart / 2;
 
     var top = defaultTopMargin;
     var scale = 1.0;
     if (_scrollController.hasClients) {
-      var offset = _scrollController.offset;
+      double offset = _scrollController.offset;
       top -= offset;
 
-      if (offset < defaultTopMargin - scaleStart)
+      if (offset < defaultTopMargin - scaleStart) {
         scale = 1.0;
-      else if (offset < defaultTopMargin - scaleEnd)
+      } else if (offset < defaultTopMargin - scaleEnd) {
         scale = (defaultTopMargin - scaleEnd - offset) / scaleEnd;
-      else
+      } else {
         scale = 0.0;
+      }
     }
 
     return Positioned(
@@ -232,6 +234,7 @@ class _UserScreenState extends State<UserScreen> {
         transform: Matrix4.identity()..scale(scale),
         alignment: Alignment.center,
         child: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
           heroTag: 'btn1',
           onPressed: () {},
           child: Icon(

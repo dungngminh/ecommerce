@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.6.1"
+  backdrop:
+    dependency: "direct main"
+    description:
+      name: backdrop
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.2"
   badges:
     dependency: "direct main"
     description:
@@ -114,13 +121,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  fluttericon:
-    dependency: "direct main"
-    description:
-      name: fluttericon
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   js:
     dependency: transitive
     description:

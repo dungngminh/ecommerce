@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ecommerce/utils/extension.dart';
 
 //COLOR
 Color kblack = Color(0xFF000000);
@@ -25,9 +26,8 @@ Color darkGrey = Color.fromRGBO(18, 18, 18, 1);
 ThemeData themeData(bool isDarkMode, BuildContext context) {
   return ThemeData(
     scaffoldBackgroundColor: isDarkMode ? darkGrey : Colors.grey[200],
-    primarySwatch: Colors.blue,
-    primaryColor: isDarkMode ? darkGrey : Colors.blue,
-    accentColor: Colors.lightBlue,
+    primaryColor: isDarkMode ? 'bb86fc'.toColor() : '6200ee'.toColor(),
+    accentColor: isDarkMode ? darkGrey : '6200ee'.toColor(),
     backgroundColor: isDarkMode ? darkGrey : kwhite,
     indicatorColor: isDarkMode ? Color(0XFF0E1D36) : Color(0XFFF1F5F8),
     buttonColor: isDarkMode ? Color(0xFF3B3B3B) : Color(0xFFF1F5FB),
@@ -46,21 +46,27 @@ ThemeData themeData(bool isDarkMode, BuildContext context) {
           colorScheme: isDarkMode ? ColorScheme.dark() : ColorScheme.light(),
         ),
     appBarTheme: AppBarTheme(
+      //can use headline6 to config title app bar
+      backwardsCompatibility: false,
       elevation: 0,
-      backgroundColor: isDarkMode ? darkGrey : Colors.blue,
+      backgroundColor: isDarkMode ? 'bb86fc'.toColor() : '6200ee'.toColor(),
       titleTextStyle: TextStyle(
-        color: Colors.white,
-      ),
-      actionsIconTheme: IconThemeData(
-        color: Colors.white,
-      ),
+          color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       unselectedItemColor: isDarkMode ? Colors.white : Colors.grey,
-      selectedItemColor: Colors.blue,
+      selectedItemColor: isDarkMode ? 'bb86fc'.toColor() : '6200ee'.toColor(),
     ),
   );
 }
+
+// ThemeData themeData2(bool isDarkMode, BuildContext context) {
+//   return ThemeData(
+//       primaryColor: isDarkMode ? 'bb86fc'.toColor() : '6200ee'.toColor(),
+//       secondaryHeaderColor: '03dac6'.toColor(),
+//       backgroundColor: isDarkMode ? darkGrey : 'ffffff'.toColor(),
+//       errorColor: isDarkMode ? 'cd6679'.toColor() : 'b00020'.toColor());
+// }
 
 //IconBottomBar
 

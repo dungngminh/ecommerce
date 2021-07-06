@@ -45,10 +45,10 @@ class _FeedsProductState extends State<FeedsProduct> {
                   animationType: BadgeAnimationType.scale,
                   shape: BadgeShape.square,
                   badgeColor: Colors.deepPurple,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomRight: Radius.circular(8),
                   ),
-                  badgeContent: Text(
+                  badgeContent: const Text(
                     'New',
                     style: TextStyle(
                       color: Colors.white,
@@ -58,15 +58,15 @@ class _FeedsProductState extends State<FeedsProduct> {
               ],
             ),
             Container(
-              padding: EdgeInsets.only(left: 5),
-              margin: EdgeInsets.only(left: 5, bottom: 2, right: 3),
+              padding: const EdgeInsets.only(left: 5),
+              margin: const EdgeInsets.only(left: 5, bottom: 2, right: 3),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
-                  Text(
+                  const Text(
                     'ROG Zephyrus G14',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
@@ -76,7 +76,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Padding(
+                  const Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
                       '\$ price',
@@ -113,7 +113,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                         child: InkWell(
                           onTap: () {},
                           borderRadius: BorderRadius.circular(18),
-                          child: Icon(
+                          child: const Icon(
                             Icons.more_horiz,
                             color: Colors.grey,
                           ),

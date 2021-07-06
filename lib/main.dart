@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-  void getCurrentAppTheme() async {
+  Future getCurrentAppTheme() async {
     themeProvider.darkTheme = await themeProvider.setting.getTheme();
   }
 

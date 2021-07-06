@@ -4,17 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:provider/provider.dart';
 
-class FullCart extends StatefulWidget {
-  const FullCart({Key? key}) : super(key: key);
-
+class CartIem extends StatefulWidget {
   @override
-  _FullCartState createState() => _FullCartState();
+  _CartIemState createState() => _CartIemState();
 }
 
-class _FullCartState extends State<FullCart> {
+class _CartIemState extends State<CartIem> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<DarkThemeProvider>(context);
     var size = MediaQuery.of(context).size;
 
     return Container(
@@ -85,7 +82,7 @@ class _FullCartState extends State<FullCart> {
                 Row(
                   children: [
                     Text(
-                      'Price',
+                      'Price: ',
                       style: TextStyle(
                         color: Colors.black,
                       ),
@@ -101,6 +98,9 @@ class _FullCartState extends State<FullCart> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 2,
                 ),
                 Row(
                   children: [
@@ -117,10 +117,8 @@ class _FullCartState extends State<FullCart> {
                       '450\$',
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: themeProvider.darkTheme
-                            ? Colors.brown.shade900
-                            : Theme.of(context).accentColor,
+                        fontWeight: FontWeight.w900,
+                        color: Theme.of(context).accentColor,
                       ),
                     ),
                   ],
@@ -131,10 +129,8 @@ class _FullCartState extends State<FullCart> {
                       'Free ship',
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: themeProvider.darkTheme
-                            ? Colors.brown.shade900
-                            : Theme.of(context).accentColor,
+                        fontWeight: FontWeight.w800,
+                        color: Theme.of(context).accentColor,
                       ),
                     ),
                     SizedBox(
