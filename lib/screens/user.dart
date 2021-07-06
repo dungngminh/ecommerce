@@ -102,7 +102,7 @@ class _UserScreenState extends State<UserScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 20),
+                  padding: const EdgeInsets.only(left: 8.0, top: 20, bottom: 5),
                   child: userTile('User Infomation'),
                 ),
                 Divider(
@@ -111,14 +111,10 @@ class _UserScreenState extends State<UserScreen> {
                 ),
                 userListTile('Email', 'email sub', 0),
                 userListTile('Phone Number', 'phone sub', 1),
-                userListTile('Email', 'email sub', 0),
-                userListTile('Phone Number', 'phone sub', 1),
-                userListTile('Email', 'email sub', 0),
-                userListTile('Phone Number', 'phone sub', 1),
                 userListTile('Shipping address', 'address sub', 2),
                 userListTile('Joined Day', 'day sub', 3),
                 Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 20),
+                  padding: const EdgeInsets.only(left: 8.0, top: 20, bottom: 5),
                   child: userTile('User Setting'),
                 ),
                 Divider(
@@ -128,6 +124,9 @@ class _UserScreenState extends State<UserScreen> {
                 userListTile('Dark Mode', 'Turn on/off dark mode', 4,
                     isSwitchTitle: true, provider: themeChange),
                 userListTile('Log out', 'Log out', 5),
+                SizedBox(
+                  height: 100,
+                )
               ],
             ),
           ),

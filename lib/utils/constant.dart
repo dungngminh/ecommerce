@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttericon/entypo_icons.dart';
 
 //COLOR
 Color kblack = Color(0xFF000000);
@@ -25,7 +24,7 @@ Color darkGrey = Color.fromRGBO(18, 18, 18, 1);
 //ThemeData
 ThemeData themeData(bool isDarkMode, BuildContext context) {
   return ThemeData(
-    scaffoldBackgroundColor: isDarkMode ? darkGrey : Colors.white,
+    scaffoldBackgroundColor: isDarkMode ? darkGrey : Colors.grey[200],
     primarySwatch: Colors.blue,
     primaryColor: isDarkMode ? darkGrey : Colors.blue,
     accentColor: Colors.lightBlue,
@@ -48,6 +47,13 @@ ThemeData themeData(bool isDarkMode, BuildContext context) {
         ),
     appBarTheme: AppBarTheme(
       elevation: 0,
+      backgroundColor: isDarkMode ? darkGrey : Colors.blue,
+      titleTextStyle: TextStyle(
+        color: Colors.white,
+      ),
+      actionsIconTheme: IconThemeData(
+        color: Colors.white,
+      ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       unselectedItemColor: isDarkMode ? Colors.white : Colors.grey,
@@ -63,3 +69,4 @@ IconData kFeed = Icons.rss_feed_rounded;
 IconData kSearch = Icons.search;
 IconData kCart = Icons.shopping_cart;
 IconData kUser = Icons.person;
+IconData kDelete = Icons.delete;

@@ -1,6 +1,8 @@
+import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:provider/provider.dart';
 
 class FullCart extends StatefulWidget {
   const FullCart({Key? key}) : super(key: key);
@@ -12,6 +14,9 @@ class FullCart extends StatefulWidget {
 class _FullCartState extends State<FullCart> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<DarkThemeProvider>(context);
+    var size = MediaQuery.of(context).size;
+
     return Container(
       height: 130,
       margin: const EdgeInsets.all(10),
@@ -37,13 +42,14 @@ class _FullCartState extends State<FullCart> {
           ),
           Flexible(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
                       child: Text(
-                        'adadadadadada',
+                        'ROG Zephyrus G14',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -59,6 +65,7 @@ class _FullCartState extends State<FullCart> {
                         borderRadius: BorderRadius.circular(32),
                         onTap: () {},
                         child: Container(
+                          margin: const EdgeInsets.only(right: 5),
                           height: 25,
                           width: 25,
                           child: Image(
@@ -69,12 +76,119 @@ class _FullCartState extends State<FullCart> {
                           ),
                         ),
                       ),
-                    )
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Price',
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      '450\$',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ],
                 ),
                 Row(
                   children: [
-                    Text('hello'),
+                    Text(
+                      'Sub Total: ',
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      '450\$',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: themeProvider.darkTheme
+                            ? Colors.brown.shade900
+                            : Theme.of(context).accentColor,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Free ship',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: themeProvider.darkTheme
+                            ? Colors.brown.shade900
+                            : Theme.of(context).accentColor,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 60,
+                    ),
+                    Row(
+                      children: [
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(32),
+                            onTap: () {},
+                            child: Container(
+                              height: 25,
+                              width: 25,
+                              child: Icon(
+                                Icons.remove,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Card(
+                          elevation: 12,
+                          child: Container(
+                            width: size.width * 0.1,
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '1',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(32),
+                            onTap: () {},
+                            child: Container(
+                              height: 25,
+                              width: 25,
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ],

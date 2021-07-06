@@ -14,7 +14,7 @@ class BottomBarScreen extends StatefulWidget {
 }
 
 class _BottomBarScreenState extends State<BottomBarScreen> {
-  int _selectedIndex = 3;
+  int _selectedIndex = 1;
   late List<Map<String, Object>> _pages;
 
   @override
@@ -81,14 +81,17 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.blue,
-          tooltip: 'Search',
-          elevation: 5,
-          onPressed: () {},
-          child: Icon(
-            kSearch,
-            color: Colors.white,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: FloatingActionButton(
+            backgroundColor: Colors.blue,
+            tooltip: 'Search',
+            elevation: 5,
+            onPressed: () {},
+            child: Icon(
+              kSearch,
+              color: Colors.white,
+            ),
           ),
         ));
   }
