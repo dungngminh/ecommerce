@@ -4,8 +4,8 @@ import 'package:ecommerce/screens/cart/widget/empty_cart.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
 
-
 class CartScreen extends StatelessWidget {
+  static const routeName = '/cart/cart.dart';
   @override
   Widget build(BuildContext context) {
     List products = [];

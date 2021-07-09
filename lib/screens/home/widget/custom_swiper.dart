@@ -1,3 +1,4 @@
+import 'package:ecommerce/screens/inner_screen/brand_navigator_rail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 
@@ -19,7 +20,15 @@ class CustomSwiper extends StatelessWidget {
       height: 200,
       width: size.width,
       child: Swiper(
-        onTap: (index) {},
+        autoplay: true,
+        onTap: (index) {
+          Navigator.of(context).pushNamed(
+            BrandNavigationRailScreen.routeName,
+            arguments: {
+              index,
+            },
+          );
+        },
         itemCount: _listBrand.length,
         itemBuilder: (context, index) {
           return Container(

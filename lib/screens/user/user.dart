@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class UserScreen extends StatefulWidget {
+  static const routeName = '/user/user.dart';
   @override
   _UserScreenState createState() => _UserScreenState();
 }
@@ -13,6 +14,8 @@ class _UserScreenState extends State<UserScreen> {
   double top = 0.0;
 
   final List<IconData> _userListTileIcon = [
+    Icons.favorite_rounded,
+    Icons.shopping_cart_rounded,
     Icons.email,
     Icons.phone,
     Icons.local_shipping,
@@ -54,15 +57,6 @@ class _UserScreenState extends State<UserScreen> {
                   builder: (context, constraints) {
                     top = constraints.biggest.height;
                     return Container(
-                      decoration: const BoxDecoration(
-                          // gradient: LinearGradient(
-                          //   begin: Alignment.topRight,
-                          //   end: Alignment.bottomRight,
-                          //   colors: [starterColor, endColor],
-                          //   stops: [0, 1],
-                          //   tileMode: TileMode.clamp,
-                          // ),
-                          ),
                       child: FlexibleSpaceBar(
                         collapseMode: CollapseMode.parallax,
                         centerTitle: true,
@@ -120,32 +114,59 @@ class _UserScreenState extends State<UserScreen> {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(left: 8.0, top: 20, bottom: 5),
+                          const EdgeInsets.only(left: 15.0, top: 20, bottom: 5),
+                      child: userTile('User Bag'),
+                    ),
+                    const Divider(
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                    userListTile(
+                      'Wishlist',
+                      0,
+                      color: Colors.red,
+                      trailing: Icon(
+                        Icons.chevron_right_outlined,
+                        color: Colors.red,
+                      ),
+                    ),
+                    userListTile(
+                      'Cart',
+                      1,
+                      color: Theme.of(context).primaryColor,
+                      trailing: Icon(
+                        Icons.chevron_right_outlined,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 15.0, top: 10, bottom: 5),
                       child: userTile('User Infomation'),
                     ),
                     const Divider(
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    userListTile('Email', 'email sub', 0),
-                    userListTile('Phone Number', 'phone sub', 1),
-                    userListTile('Shipping address', 'address sub', 2),
-                    userListTile('Joined Day', 'day sub', 3),
+                    userListTile('Email', 2, subtitle: 'email sub'),
+                    userListTile('Phone Number', 3, subtitle: 'phone sub'),
+                    userListTile('Shipping address', 4,
+                        subtitle: 'address sub'),
+                    userListTile('Joined Day', 5, subtitle: 'day sub'),
                     Padding(
                       padding:
-                          const EdgeInsets.only(left: 8.0, top: 20, bottom: 5),
+                          const EdgeInsets.only(left: 15.0, top: 20, bottom: 5),
                       child: userTile('User Setting'),
                     ),
                     const Divider(
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    userListTile('Dark Mode', 'Turn on/off dark mode', 4,
-                        isSwitchTitle: true, provider: themeChange),
-                    userListTile('Log out', 'Log out', 5),
-                    const SizedBox(
-                      height: 100,
-                    ),
+                    userListTile('Dark Mode', 6,
+                        subtitle: 'Turn on/off dark mode',
+                        isSwitchTitle: true,
+                        provider: themeChange),
+                    userListTile('Log out', 7, subtitle: 'Log out'),
                   ],
                 ),
               ),
@@ -167,19 +188,26 @@ class _UserScreenState extends State<UserScreen> {
     );
   }
 
-  Widget userListTile(String title, String subtitle, int index,
-      {bool? isSwitchTitle, DarkThemeProvider? provider}) {
+  Widget userListTile(String title, int index,
+      {String? subtitle,
+      Widget? trailing,
+      Color? color,
+      bool? isSwitchTitle,
+      DarkThemeProvider? provider}) {
     return (isSwitchTitle != null && provider != null)
         ? SwitchListTile(
             activeColor: Theme.of(context).primaryColor,
             title: Text(
               title,
             ),
-            subtitle: Text(
-              subtitle,
-            ),
+            subtitle: subtitle != null
+                ? Text(
+                    subtitle,
+                  )
+                : null,
             secondary: Icon(
               _userListTileIcon[index],
+              color: color ?? null,
             ),
             onChanged: (bool value) {
               setState(() {
@@ -196,12 +224,16 @@ class _UserScreenState extends State<UserScreen> {
                 title: Text(
                   title,
                 ),
-                subtitle: Text(
-                  subtitle,
-                ),
+                subtitle: subtitle != null
+                    ? Text(
+                        subtitle,
+                      )
+                    : null,
                 leading: Icon(
                   _userListTileIcon[index],
+                  color: color ?? null,
                 ),
+                trailing: trailing ?? null,
               ),
             ),
           );
