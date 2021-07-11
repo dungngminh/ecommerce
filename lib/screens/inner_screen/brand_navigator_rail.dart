@@ -5,7 +5,7 @@ import 'brand_rail.dart';
 class BrandNavigationRailScreen extends StatefulWidget {
   BrandNavigationRailScreen({Key? key}) : super(key: key);
 
-  static const routeName = '/inner_screen/brand_navigator_rail.dart';
+  static const routeName = '/brand_navigator_rail';
   @override
   _BrandNavigationRailScreenState createState() =>
       _BrandNavigationRailScreenState();

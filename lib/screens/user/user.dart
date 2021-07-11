@@ -1,10 +1,12 @@
 import 'package:ecommerce/provider/dark_theme_provider.dart';
+import 'package:ecommerce/screens/cart/cart.dart';
+import 'package:ecommerce/screens/wishlist/wishlist.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class UserScreen extends StatefulWidget {
-  static const routeName = '/user/user.dart';
+  static const routeName = '/user';
   @override
   _UserScreenState createState() => _UserScreenState();
 }
@@ -121,15 +123,15 @@ class _UserScreenState extends State<UserScreen> {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    userListTile(
-                      'Wishlist',
-                      0,
-                      color: Colors.red,
-                      trailing: Icon(
-                        Icons.chevron_right_outlined,
+                    userListTile('Wishlist', 0,
                         color: Colors.red,
-                      ),
-                    ),
+                        trailing: Icon(
+                          Icons.chevron_right_outlined,
+                          color: Colors.red,
+                        ),
+                        navigator: () => Navigator.of(context).pushNamed(
+                              WishList.routeName,
+                            )),
                     userListTile(
                       'Cart',
                       1,
@@ -137,6 +139,9 @@ class _UserScreenState extends State<UserScreen> {
                       trailing: Icon(
                         Icons.chevron_right_outlined,
                         color: Theme.of(context).primaryColor,
+                      ),
+                      navigator: () => Navigator.of(context).pushNamed(
+                        CartScreen.routeName,
                       ),
                     ),
                     Padding(
@@ -192,6 +197,7 @@ class _UserScreenState extends State<UserScreen> {
       {String? subtitle,
       Widget? trailing,
       Color? color,
+      Function()? navigator,
       bool? isSwitchTitle,
       DarkThemeProvider? provider}) {
     return (isSwitchTitle != null && provider != null)
@@ -219,7 +225,7 @@ class _UserScreenState extends State<UserScreen> {
         : Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {},
+              onTap: navigator,
               child: ListTile(
                 title: Text(
                   title,

@@ -1,8 +1,9 @@
 import 'package:ecommerce/screens/wishlist/widget/wishlist_empty.dart';
+import 'package:ecommerce/screens/wishlist/widget/wishlist_full.dart';
 import 'package:flutter/material.dart';
 
 class WishList extends StatelessWidget {
-  static const routeName = '/wishlist/wishlist.dart';
+  static const routeName = '/wishlist';
   @override
   Widget build(BuildContext context) {
     List wishlistList = [];
@@ -11,7 +12,14 @@ class WishList extends StatelessWidget {
             body: EmptyWishlist(),
           )
         : Scaffold(
-            body: Container(),
+            appBar: AppBar(
+              title: Text('Wish List'),
+            ),
+            body: ListView.builder(
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  return WishlistFull();
+                }),
           );
   }
 }

@@ -28,7 +28,7 @@ ThemeData themeData(bool isDarkMode, BuildContext context) {
     scaffoldBackgroundColor: isDarkMode ? darkGrey : Colors.grey[100],
     primaryColor: isDarkMode ? 'bb86fc'.toColor() : '6200ee'.toColor(),
     accentColor: isDarkMode ? darkGrey : '6200ee'.toColor(),
-    backgroundColor: isDarkMode ? darkGrey : kwhite,
+    backgroundColor: isDarkMode ? darkGrey : Colors.grey[100],
     indicatorColor: isDarkMode ? Color(0XFF0E1D36) : Color(0XFFF1F5F8),
     buttonColor: isDarkMode ? Color(0xFF3B3B3B) : Color(0xFFF1F5FB),
     hintColor: isDarkMode ? Colors.grey.shade300 : Colors.grey.shade800,
