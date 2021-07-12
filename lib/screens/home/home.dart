@@ -123,7 +123,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CustomSwiper(size: size, listBrand: _listBrand),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              padding: const EdgeInsets.only(
+                  left: 16, right: 16, bottom: 14, top: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
