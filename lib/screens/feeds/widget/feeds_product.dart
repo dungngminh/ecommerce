@@ -1,9 +1,14 @@
 import 'package:badges/badges.dart';
+import 'package:ecommerce/models/product.dart';
 import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:flutter/material.dart';
 
 class FeedsProduct extends StatefulWidget {
-  const FeedsProduct({Key? key}) : super(key: key);
+  final Product _product;
+
+  const FeedsProduct({Key? key, required Product product})
+      : _product = product,
+        super(key: key);
 
   @override
   _FeedsProductState createState() => _FeedsProductState();
@@ -36,8 +41,8 @@ class _FeedsProductState extends State<FeedsProduct> {
                         minHeight: 100,
                         maxHeight: size.height * 0.3,
                       ),
-                      child: Image.asset(
-                        'assets/images/image_demo/g14.jpg',
+                      child: Image.network(
+                        widget._product.imageSrc,
                         fit: BoxFit.fitWidth,
                       ),
                     ),
@@ -72,8 +77,8 @@ class _FeedsProductState extends State<FeedsProduct> {
                     const SizedBox(
                       height: 4,
                     ),
-                    const Text(
-                      'ROG Zephyrus G14',
+                    Text(
+                      widget._product.title,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: TextStyle(
@@ -82,10 +87,10 @@ class _FeedsProductState extends State<FeedsProduct> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        '\$1299',
+                        '\$ ${widget._product.price}',
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
@@ -106,7 +111,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                             ),
                           ),
                           Text(
-                            '12',
+                            '${widget._product.quantity}',
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.red,

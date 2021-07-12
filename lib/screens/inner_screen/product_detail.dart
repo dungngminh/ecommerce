@@ -1,6 +1,5 @@
 import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/screens/cart/cart.dart';
-import 'package:ecommerce/screens/feeds/widget/feeds_product.dart';
 import 'package:ecommerce/screens/wishlist/wishlist.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -264,7 +263,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     itemCount: 4,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return FeedsProduct();
+                      return Text('$index');
                     },
                   ),
                 ),
