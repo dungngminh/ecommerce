@@ -2,14 +2,9 @@ import 'package:badges/badges.dart';
 import 'package:ecommerce/models/product.dart';
 import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FeedsProduct extends StatefulWidget {
-  final Product _product;
-
-  const FeedsProduct({Key? key, required Product product})
-      : _product = product,
-        super(key: key);
-
   @override
   _FeedsProductState createState() => _FeedsProductState();
 }
@@ -17,6 +12,7 @@ class FeedsProduct extends StatefulWidget {
 class _FeedsProductState extends State<FeedsProduct> {
   @override
   Widget build(BuildContext context) {
+    final productAtributte = Provider.of<Product>(context);
     var size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(5),
@@ -42,7 +38,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                         maxHeight: size.height * 0.3,
                       ),
                       child: Image.network(
-                        widget._product.imageSrc,
+                        productAtributte.imageSrc,
                         fit: BoxFit.fitWidth,
                       ),
                     ),
@@ -78,7 +74,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                       height: 4,
                     ),
                     Text(
-                      widget._product.title,
+                      productAtributte.title,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: TextStyle(
@@ -90,7 +86,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        '\$ ${widget._product.price}',
+                        '\$ ${productAtributte.price}',
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
@@ -111,7 +107,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                             ),
                           ),
                           Text(
-                            '${widget._product.quantity}',
+                            '${productAtributte.quantity}',
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.red,

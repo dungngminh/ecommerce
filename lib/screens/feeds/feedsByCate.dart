@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 
-class FeedsScreen extends StatelessWidget {
-  static const routeName = '/feeds';
+class FeedsByCategoryScreen extends StatelessWidget {
+  static const routeName = '/feedsByCate';
   @override
   Widget build(BuildContext context) {
-    final _productProvider = Provider.of<ProductProvider>(context);
-    var _listProduct = _productProvider.products;
+    final _productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
+    final categoryName = ModalRoute.of(context)!.settings.arguments as String;
+
+    final productList = _productProvider.productByCategory(categoryName);
     return Scaffold(
       appBar: AppBar(
         title: Text("Feeds"),
@@ -18,9 +21,9 @@ class FeedsScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: StaggeredGridView.countBuilder(
           crossAxisCount: 4,
-          itemCount: _listProduct.length,
+          itemCount: productList.length,
           itemBuilder: (context, index) => ChangeNotifierProvider.value(
-            value: _listProduct[index],
+            value: productList[index],
             child: FeedsProduct(),
           ),
           staggeredTileBuilder: (index) =>

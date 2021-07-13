@@ -84,12 +84,19 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               width: double.infinity,
               height: 180,
-              margin: EdgeInsets.symmetric(horizontal: 3),
-              child: ListView.builder(
-                itemCount: 7,
+              margin: EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
+              child: ListView.separated(
+                itemCount: 6,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return CategoryWidget(index: index);
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    width: 20,
+                  );
                 },
               ),
             ),

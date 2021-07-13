@@ -1,3 +1,4 @@
+import 'package:ecommerce/screens/feeds/feedsByCate.dart';
 import 'package:flutter/material.dart';
 
 class CategoryWidget extends StatelessWidget {
@@ -18,72 +19,78 @@ class CategoryWidget extends StatelessWidget {
       'imageSrc': 'assets/images/image_categories/beauty.png',
     },
     {
-      'name': 'Books',
-      'imageSrc': 'assets/images/image_categories/books.jpg',
+      'name': 'Watches',
+      'imageSrc': 'assets/images/image_categories/watch.jpg',
     },
     {
-      'name': 'Home Appliances',
-      'imageSrc': 'assets/images/image_categories/appliances.png',
+      'name': 'Laptop',
+      'imageSrc': 'assets/images/image_categories/laptop.jpg',
     },
     {
-      'name': 'Kids',
-      'imageSrc': 'assets/images/image_categories/kids.jpg',
-    },
-    {
-      'name': 'Entertainment',
-      'imageSrc': 'assets/images/image_categories/entertainment.png',
+      'name': 'Furniture',
+      'imageSrc': 'assets/images/image_categories/furniture.jpg',
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // color: Colors.white,
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-              color: Colors.white,
-              image: DecorationImage(
-                image: Image.asset(
-                  _categories[_index]['imageSrc'] as String,
-                  fit: BoxFit.fill,
-                ).image,
+    return InkWell(
+      onTap: () {
+        print('${_categories[_index]['name']}');
+        Navigator.of(context).pushNamed(FeedsByCategoryScreen.routeName,
+            arguments: '${_categories[_index]['name']}');
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: 0,
+              left: 10,
+              right: 10,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Text(
+                  _categories[_index]['name'] as String,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    color: Theme.of(context).textSelectionTheme.selectionColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            width: 150,
-            height: 150,
-          ),
-          Positioned(
-            bottom: 0,
-            left: 10,
-            right: 10,
-            child: Container(
+            Container(
               decoration: BoxDecoration(
-                color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+                color: Colors.white,
+                image: DecorationImage(
+                  image: Image.asset(
+                    _categories[_index]['imageSrc'] as String,
+                    fit: BoxFit.fill,
+                  ).image,
                 ),
               ),
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text(
-                _categories[_index]['name'] as String,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  color: Theme.of(context).textSelectionTheme.selectionColor,
-                ),
-                textAlign: TextAlign.center,
-              ),
+              // margin: EdgeInsets.symmetric(horizontal: 10),
+              width: 150,
+              height: 150,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
