@@ -1,4 +1,5 @@
 import 'package:backdrop/backdrop.dart';
+import 'package:ecommerce/provider/product_provider.dart';
 import 'package:ecommerce/screens/home/widget/backdrop.dart';
 import 'package:ecommerce/screens/home/widget/category.dart';
 import 'package:ecommerce/screens/home/widget/custom_carousel.dart';
@@ -6,6 +7,7 @@ import 'package:ecommerce/screens/home/widget/custom_swiper.dart';
 import 'package:ecommerce/screens/home/widget/popular_product.dart';
 import 'package:ecommerce/widget/inkwel_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -32,6 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    final productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
+    final popularProductList = productProvider.popularProduct;
     return BackdropScaffold(
       //want to change radius ?, let's Override frontLayerBorderRadius : default Pub is 16
       frontLayerBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -163,11 +169,13 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 250,
               margin: const EdgeInsets.symmetric(horizontal: 10),
               child: ListView.separated(
-                itemCount: 4,
+                itemCount: popularProductList.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return PopularProduct(
-                    index: index,
+                  print(popularProductList.length);
+                  return ChangeNotifierProvider.value(
+                    value: popularProductList[index],
+                    child: PopularProduct(),
                   );
                 },
                 separatorBuilder: (context, index) {
@@ -179,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 30,
             ),
           ],
         ),

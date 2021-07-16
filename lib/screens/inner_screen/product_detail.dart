@@ -1,5 +1,8 @@
+import 'package:ecommerce/models/product.dart';
 import 'package:ecommerce/provider/dark_theme_provider.dart';
+import 'package:ecommerce/provider/product_provider.dart';
 import 'package:ecommerce/screens/cart/cart.dart';
+import 'package:ecommerce/screens/feeds/widget/feeds_product.dart';
 import 'package:ecommerce/screens/wishlist/wishlist.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +19,15 @@ class ProductDetail extends StatefulWidget {
 class _ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
-    var themeProvider = Provider.of<DarkThemeProvider>(context);
+    final themeProvider = Provider.of<DarkThemeProvider>(context);
     var size = MediaQuery.of(context).size;
+    //provider
+    final productProvider = Provider.of<ProductProvider>(context);
+    final productList = productProvider.products;
+
+    final id = ModalRoute.of(context)!.settings.arguments as String;
+    print(id);
+    final productDetail = productProvider.productById(id);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -55,9 +65,9 @@ class _ProductDetailState extends State<ProductDetail> {
         children: [
           Container(
             foregroundDecoration: BoxDecoration(color: Colors.black12),
-            height: size.height * 0.45,
+            height: size.height * 0.4,
             width: double.infinity,
-            child: Image.asset('assets/images/image_demo/g17.jpg'),
+            child: Image.network(productDetail.imageSrc, fit: BoxFit.contain),
           ),
           SingleChildScrollView(
             padding: EdgeInsets.only(top: 16.0, bottom: 20),
@@ -117,7 +127,7 @@ class _ProductDetailState extends State<ProductDetail> {
                             Container(
                               width: size.width * 0.9,
                               child: Text(
-                                'title',
+                                productDetail.title,
                                 maxLines: 2,
                                 style: TextStyle(
                                   fontSize: 28,
@@ -129,7 +139,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               height: 8,
                             ),
                             Text(
-                              '\$ 240',
+                              '\$ ${productDetail.price}',
                               style: TextStyle(
                                 color: themeProvider.darkTheme
                                     ? Theme.of(context).disabledColor
@@ -156,7 +166,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
-                          'Description',
+                          productDetail.description,
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 21,
@@ -175,14 +185,14 @@ class _ProductDetailState extends State<ProductDetail> {
                           height: 1,
                         ),
                       ),
-                      _detail(
-                          themeProvider.darkTheme, 'Brand:  ', 'Brand Name'),
-                      _detail(
-                          themeProvider.darkTheme, 'Quantity:  ', '12 left'),
-                      _detail(
-                          themeProvider.darkTheme, 'Category:  ', 'Cate Name'),
-                      _detail(
-                          themeProvider.darkTheme, 'Popularity:  ', 'Popular'),
+                      _detail(themeProvider.darkTheme, 'Brand:  ',
+                          productDetail.brand),
+                      _detail(themeProvider.darkTheme, 'Quantity:  ',
+                          '${productDetail.quantity} left'),
+                      _detail(themeProvider.darkTheme, 'Category:  ',
+                          productDetail.productCategory),
+                      _detail(themeProvider.darkTheme, 'Popularity:  ',
+                          productDetail.isPopular ? 'Yes' : 'No'),
                       SizedBox(
                         height: 15,
                       ),
@@ -258,12 +268,15 @@ class _ProductDetailState extends State<ProductDetail> {
                   padding: EdgeInsets.symmetric(horizontal: 5),
                   margin: EdgeInsets.only(bottom: 30),
                   width: double.infinity,
-                  height: 300,
+                  height: 350,
                   child: ListView.builder(
                     itemCount: 4,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return Text('$index');
+                      return ChangeNotifierProvider.value(
+                        value: productList[index],
+                        child: FeedsProduct(),
+                      );
                     },
                   ),
                 ),

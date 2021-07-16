@@ -1,10 +1,14 @@
+import 'package:ecommerce/models/product.dart';
+import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BrandsNavigationRail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final productAtributte = Provider.of<Product>(context);
     return InkWell(
-      onTap: () {},
+      onTap: () => Navigator.pushNamed(context, ProductDetail.routeName),
       child: Container(
         padding: EdgeInsets.only(left: 5.0, right: 5.0),
         margin: EdgeInsets.only(right: 20.0, bottom: 5, top: 18),
@@ -17,8 +21,7 @@ class BrandsNavigationRail extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   image: DecorationImage(
-                    image:
-                        Image.asset('assets/images/image_demo/g15.png').image,
+                    image: Image.network(productAtributte.imageSrc).image,
                     fit: BoxFit.contain,
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -51,7 +54,7 @@ class BrandsNavigationRail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'ROG G15',
+                      productAtributte.title,
                       maxLines: 4,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
@@ -64,7 +67,7 @@ class BrandsNavigationRail extends StatelessWidget {
                       height: 20.0,
                     ),
                     FittedBox(
-                      child: Text('\$ 1666',
+                      child: Text('\$ ${productAtributte.price}',
                           maxLines: 1,
                           style: TextStyle(
                             color: Colors.red,
@@ -74,7 +77,7 @@ class BrandsNavigationRail extends StatelessWidget {
                     SizedBox(
                       height: 20.0,
                     ),
-                    Text('Computer',
+                    Text(productAtributte.productCategory,
                         style: TextStyle(color: Colors.grey, fontSize: 18.0)),
                     SizedBox(
                       height: 18,

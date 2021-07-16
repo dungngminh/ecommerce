@@ -1,4 +1,6 @@
+import 'package:ecommerce/provider/product_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'brand_rail.dart';
 
@@ -11,6 +13,7 @@ class BrandNavigationRailScreen extends StatefulWidget {
       _BrandNavigationRailScreenState();
 }
 
+//1635286901373
 class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
   int _selectedIndex = 0;
   final padding = 8.0;
@@ -20,6 +23,7 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
   @override
   void didChangeDependencies() {
     routeArgs = ModalRoute.of(context)!.settings.arguments.toString();
+    print(routeArgs.toString());
     _selectedIndex = int.parse(
       routeArgs.substring(1, 2),
     );
@@ -192,15 +196,21 @@ class ContentSpace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);
+    final productByBrand = productProvider.productByBrand(brand);
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 8, 0, 0),
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.fromLTRB(24, 10, 0, 0),
         child: MediaQuery.removePadding(
           removeTop: true,
           context: context,
           child: ListView.separated(
-            itemCount: 5,
-            itemBuilder: (context, index) => BrandsNavigationRail(),
+            itemCount: productByBrand.length,
+            itemBuilder: (context, index) => ChangeNotifierProvider.value(
+              value: productByBrand[index],
+              child: BrandsNavigationRail(),
+            ),
             separatorBuilder: (context, index) {
               return SizedBox(
                 height: 10,

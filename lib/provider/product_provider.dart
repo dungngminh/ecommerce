@@ -10,6 +10,17 @@ class ProductProvider with ChangeNotifier {
           .contains(productCategory.toLowerCase()))
       .toList();
 
+  List<Product> productByBrand(String brand) => _products
+      .where((element) =>
+          element.brand.toLowerCase().contains(brand.toLowerCase()))
+      .toList();
+
+  List<Product> get popularProduct =>
+      _products.where((element) => element.isPopular).toList();
+
+  Product productById(String id) => _products.firstWhere(
+      (element) => element.id.toLowerCase().contains(id.toLowerCase()));
+
   final List<Product> _products = [
     Product(
         id: 'Samsung1',
@@ -22,7 +33,7 @@ class ProductProvider with ChangeNotifier {
         brand: 'Samsung',
         productCategory: 'Phone & Gadgets',
         quantity: 65,
-        isPopular: false),
+        isPopular: true),
     Product(
         id: 'Samsung Galaxy A10s',
         title: 'Samsung Galaxy A10s',

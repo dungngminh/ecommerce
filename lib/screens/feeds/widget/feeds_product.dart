@@ -17,7 +17,7 @@ class _FeedsProductState extends State<FeedsProduct> {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: InkWell(
-        onTap: () => Navigator.of(context).pushNamed(ProductDetail.routeName),
+        onTap: () => Navigator.of(context).pushNamed(ProductDetail.routeName, arguments: productAtributte.id),
         child: Container(
           width: 250,
           height: 290,
@@ -39,7 +39,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                       ),
                       child: Image.network(
                         productAtributte.imageSrc,
-                        fit: BoxFit.fitWidth,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
