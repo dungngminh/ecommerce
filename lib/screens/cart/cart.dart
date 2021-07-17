@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ecommerce/screens/cart/widget/custom_widget.dart';
 import 'package:ecommerce/screens/cart/widget/cart_item.dart';
 import 'package:ecommerce/screens/cart/widget/empty_cart.dart';
@@ -9,7 +11,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List products = [];
-    return products.isNotEmpty
+    return products.isEmpty
         ? Scaffold(
             body: EmptyCart(),
           )
@@ -36,7 +38,7 @@ class CartScreen extends StatelessWidget {
               child: ListView.builder(
                 itemCount: 5,
                 itemBuilder: (context, index) {
-                  return CartItem();
+                  return CartItemWidget();
                 },
               ),
             ),

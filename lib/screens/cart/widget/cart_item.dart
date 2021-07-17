@@ -2,12 +2,12 @@ import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
-class CartItem extends StatefulWidget {
+class CartItemWidget extends StatefulWidget {
   @override
-  _CartItemState createState() => _CartItemState();
+  _CartItemWidgetState createState() => _CartItemWidgetState();
 }
 
-class _CartItemState extends State<CartItem> {
+class _CartItemWidgetState extends State<CartItemWidget> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
