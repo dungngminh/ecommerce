@@ -24,7 +24,8 @@ class _PopularProductState extends State<PopularProduct> {
   Widget build(BuildContext context) {
     final productAttribute = Provider.of<Product>(context);
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, ProductDetail.routeName),
+      onTap: () => Navigator.pushNamed(context, ProductDetail.routeName,
+          arguments: productAttribute.id),
       child: Container(
         width: 250,
         decoration: BoxDecoration(

@@ -8,7 +8,8 @@ class BrandsNavigationRail extends StatelessWidget {
   Widget build(BuildContext context) {
     final productAtributte = Provider.of<Product>(context);
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, ProductDetail.routeName),
+      onTap: () => Navigator.pushNamed(context, ProductDetail.routeName,
+          arguments: productAtributte.id),
       child: Container(
         padding: EdgeInsets.only(left: 5.0, right: 5.0),
         margin: EdgeInsets.only(right: 20.0, bottom: 5, top: 18),

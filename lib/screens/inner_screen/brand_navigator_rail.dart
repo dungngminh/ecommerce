@@ -16,7 +16,7 @@ class BrandNavigationRailScreen extends StatefulWidget {
 //1635286901373
 class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
   int _selectedIndex = 0;
-  final padding = 8.0;
+  final padding = 2.0;
   late String routeArgs;
   late String brand;
 
@@ -61,6 +61,11 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
     if (_selectedIndex == 6) {
       setState(() {
         brand = 'Surface';
+      });
+    }
+    if (_selectedIndex == 7) {
+      setState(() {
+        brand = 'All';
       });
     }
     super.didChangeDependencies();
@@ -119,6 +124,11 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
                               brand = 'Surface';
                             });
                           }
+                          if (_selectedIndex == 7) {
+                            setState(() {
+                              brand = 'All';
+                            });
+                          }
                           print(brand);
                         });
                       },
@@ -136,7 +146,7 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: 80,
+                            height: 30,
                           ),
                         ],
                       ),
@@ -149,7 +159,7 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
                       ),
                       unselectedLabelTextStyle: TextStyle(
                         fontSize: 15,
-                        letterSpacing: 0.8,
+                        letterSpacing: 0.5,
                       ),
                       destinations: [
                         buildRotatedTextRailDestination('Acer', padding),
@@ -159,6 +169,7 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
                         buildRotatedTextRailDestination("HP", padding),
                         buildRotatedTextRailDestination("Razer", padding),
                         buildRotatedTextRailDestination("Surface", padding),
+                        buildRotatedTextRailDestination("All", padding),
                       ],
                     ),
                   ),
@@ -197,7 +208,8 @@ class ContentSpace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
-    final productByBrand = productProvider.productByBrand(brand);
+    final productByBrand =
+        productProvider.productByBrand(brand); // brand == All return products
     return Expanded(
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),

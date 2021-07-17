@@ -8,8 +8,10 @@ class FeedsScreen extends StatelessWidget {
   static const routeName = '/feeds';
   @override
   Widget build(BuildContext context) {
+    final popular = ModalRoute.of(context)!.settings.arguments as String;
     final _productProvider = Provider.of<ProductProvider>(context);
     var _listProduct = _productProvider.products;
+    if (popular == 'popular') _listProduct = _productProvider.popularProduct;
     return Scaffold(
       appBar: AppBar(
         title: Text("Feeds"),

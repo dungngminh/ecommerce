@@ -1,5 +1,6 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:ecommerce/provider/product_provider.dart';
+import 'package:ecommerce/screens/feeds/feeds.dart';
 import 'package:ecommerce/screens/home/widget/backdrop.dart';
 import 'package:ecommerce/screens/home/widget/category.dart';
 import 'package:ecommerce/screens/home/widget/custom_carousel.dart';
@@ -151,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   customInkWel(
-                    onTap: () {},
+                    onTap: () => Navigator.of(context).pushNamed(FeedsScreen.routeName, arguments: 'popular'),
                     child: Text(
                       'View more...',
                       style: TextStyle(
@@ -172,7 +173,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: popularProductList.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  print(popularProductList.length);
                   return ChangeNotifierProvider.value(
                     value: popularProductList[index],
                     child: PopularProduct(),

@@ -65,7 +65,7 @@ class _ProductDetailState extends State<ProductDetail> {
         children: [
           Container(
             foregroundDecoration: BoxDecoration(color: Colors.black12),
-            height: size.height * 0.4,
+            height: size.height * 0.48,
             width: double.infinity,
             child: Image.network(productDetail.imageSrc, fit: BoxFit.contain),
           ),
@@ -91,7 +91,7 @@ class _ProductDetailState extends State<ProductDetail> {
                             child: Icon(
                               Icons.save,
                               size: 24,
-                              color: Colors.white,
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         ),
@@ -106,7 +106,7 @@ class _ProductDetailState extends State<ProductDetail> {
                             child: Icon(
                               Icons.share,
                               size: 24,
-                              color: Colors.white,
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         ),
@@ -143,7 +143,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               style: TextStyle(
                                 color: themeProvider.darkTheme
                                     ? Theme.of(context).disabledColor
-                                    : kSubTitle,
+                                    : Colors.black,
                                 fontSize: 21,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -172,7 +172,7 @@ class _ProductDetailState extends State<ProductDetail> {
                             fontSize: 21,
                             color: themeProvider.darkTheme
                                 ? Theme.of(context).disabledColor
-                                : kSubTitle,
+                                : Colors.black,
                           ),
                         ),
                       ),
@@ -221,7 +221,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                       .textSelectionTheme
                                       .selectionColor,
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 21,
+                                  fontSize: 22,
                                 ),
                               ),
                             ),
@@ -230,11 +230,12 @@ class _ProductDetailState extends State<ProductDetail> {
                               child: Text(
                                 'Be the first review!',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w300,
                                   fontSize: 20,
                                   color: themeProvider.darkTheme
                                       ? Theme.of(context).disabledColor
-                                      : kSubTitle,
+                                      : Colors.black,
                                 ),
                               ),
                             ),
@@ -367,7 +368,7 @@ class _ProductDetailState extends State<ProductDetail> {
             title,
             style: TextStyle(
               color: Theme.of(context).textSelectionTheme.selectionColor,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.bold,
               fontSize: 21.0,
             ),
           ),
@@ -376,7 +377,8 @@ class _ProductDetailState extends State<ProductDetail> {
             style: TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 20,
-              color: themeState ? Theme.of(context).disabledColor : kSubTitle,
+              color:
+                  themeState ? Theme.of(context).disabledColor : Colors.black,
             ),
           ),
         ],
