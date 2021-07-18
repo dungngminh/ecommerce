@@ -1,4 +1,4 @@
-import 'package:ecommerce/models/product.dart';
+import 'package:ecommerce/provider/cart_provider.dart';
 import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/provider/product_provider.dart';
 import 'package:ecommerce/screens/cart/cart.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetail extends StatefulWidget {
-  static const routeName = '/productDetail';
+  static const routeName = '/productAttribute';
   const ProductDetail({Key? key}) : super(key: key);
 
   @override
@@ -21,13 +21,17 @@ class _ProductDetailState extends State<ProductDetail> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DarkThemeProvider>(context);
     var size = MediaQuery.of(context).size;
-    //provider
-    final productProvider = Provider.of<ProductProvider>(context);
+    //productProvider
+    final productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
     final productList = productProvider.products;
 
-    final id = ModalRoute.of(context)!.settings.arguments as String;
-    print(id);
-    final productDetail = productProvider.productById(id);
+    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    // print(productId);
+    final productAttribute = productProvider.productById(productId);
+
+    //cartProvider
+    final cartProvder = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -67,7 +71,8 @@ class _ProductDetailState extends State<ProductDetail> {
             foregroundDecoration: BoxDecoration(color: Colors.black12),
             height: size.height * 0.48,
             width: double.infinity,
-            child: Image.network(productDetail.imageSrc, fit: BoxFit.contain),
+            child:
+                Image.network(productAttribute.imageSrc, fit: BoxFit.contain),
           ),
           SingleChildScrollView(
             padding: EdgeInsets.only(top: 16.0, bottom: 20),
@@ -127,7 +132,7 @@ class _ProductDetailState extends State<ProductDetail> {
                             Container(
                               width: size.width * 0.9,
                               child: Text(
-                                productDetail.title,
+                                productAttribute.title,
                                 maxLines: 2,
                                 style: TextStyle(
                                   fontSize: 28,
@@ -139,7 +144,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               height: 8,
                             ),
                             Text(
-                              '\$ ${productDetail.price}',
+                              '\$ ${productAttribute.price}',
                               style: TextStyle(
                                 color: themeProvider.darkTheme
                                     ? Theme.of(context).disabledColor
@@ -166,7 +171,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
-                          productDetail.description,
+                          productAttribute.description,
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 21,
@@ -186,13 +191,13 @@ class _ProductDetailState extends State<ProductDetail> {
                         ),
                       ),
                       _detail(themeProvider.darkTheme, 'Brand:  ',
-                          productDetail.brand),
+                          productAttribute.brand),
                       _detail(themeProvider.darkTheme, 'Quantity:  ',
-                          '${productDetail.quantity} left'),
+                          '${productAttribute.quantity} left'),
                       _detail(themeProvider.darkTheme, 'Category:  ',
-                          productDetail.productCategory),
+                          productAttribute.productCategory),
                       _detail(themeProvider.darkTheme, 'Popularity:  ',
-                          productDetail.isPopular ? 'Yes' : 'No'),
+                          productAttribute.isPopular ? 'Yes' : 'No'),
                       SizedBox(
                         height: 15,
                       ),
@@ -297,7 +302,11 @@ class _ProductDetailState extends State<ProductDetail> {
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         primary: Colors.redAccent.shade400,
                       ),
-                      onPressed: () {},
+                      onPressed: () => cartProvder.addItemToCart(
+                          productAttribute.id,
+                          productAttribute.title,
+                          productAttribute.price,
+                          productAttribute.imageSrc),
                       child: Text(
                         'ADD TO CART',
                         style: TextStyle(fontSize: 16, color: kwhite),

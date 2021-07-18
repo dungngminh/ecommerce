@@ -1,3 +1,4 @@
+import 'package:ecommerce/provider/cart_provider.dart';
 import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/provider/product_provider.dart';
 import 'package:ecommerce/screens/cart/cart.dart';
@@ -43,6 +44,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => ProductProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CartProvider(),
         ),
       ],
       child: Consumer<DarkThemeProvider>(

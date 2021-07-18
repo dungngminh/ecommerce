@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:ecommerce/models/product.dart';
+import 'package:ecommerce/provider/cart_provider.dart';
 import 'package:ecommerce/provider/product_provider.dart';
 import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:ecommerce/utils/constant.dart';
@@ -23,6 +24,8 @@ class _PopularProductState extends State<PopularProduct> {
   @override
   Widget build(BuildContext context) {
     final productAttribute = Provider.of<Product>(context);
+
+    final cartProvider = Provider.of<CartProvider>(context);
     return InkWell(
       onTap: () => Navigator.pushNamed(context, ProductDetail.routeName,
           arguments: productAttribute.id),
@@ -127,7 +130,12 @@ class _PopularProductState extends State<PopularProduct> {
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () => cartProvider.addItemToCart(
+                              productAttribute.id,
+                              productAttribute.title,
+                              productAttribute.price,
+                              productAttribute.imageSrc,
+                            ),
                             borderRadius: BorderRadius.circular(30),
                             child: Icon(
                               Icons.add_shopping_cart,
