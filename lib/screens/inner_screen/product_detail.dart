@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:ecommerce/provider/cart_provider.dart';
 import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/provider/product_provider.dart';
@@ -11,6 +12,7 @@ import 'package:provider/provider.dart';
 
 class ProductDetail extends StatefulWidget {
   static const routeName = '/productAttribute';
+
   const ProductDetail({Key? key}) : super(key: key);
 
   @override
@@ -38,35 +40,66 @@ class _ProductDetailState extends State<ProductDetail> {
     final wishListProvider = Provider.of<WishListProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        iconTheme: IconThemeData(
+          color: themeProvider.darkTheme ? Colors.white : Colors.black,
+        ),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 5,
         title: Text(
-          productAttribute.id,
+          productAttribute.title,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 18,
+            color: themeProvider.darkTheme ? Colors.white : Colors.black,
             fontWeight: FontWeight.normal,
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(WishList.routeName);
-            },
-            icon: Icon(
-              Icons.favorite,
-              color: wishListProvider.getAllFavoriteItems
-                      .containsKey(productAttribute.id)
-                  ? Colors.red
-                  : Colors.white,
+          Badge(
+            badgeColor: Colors.pink,
+            animationType: BadgeAnimationType.scale,
+            toAnimate: true,
+            position: BadgePosition.topEnd(
+              top: 6,
+              end: 6,
+            ),
+            badgeContent: Text(
+              wishListProvider.getAllFavoriteItems.length.toString(),
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(WishList.routeName);
+              },
+              icon: Icon(
+                Icons.favorite,
+                color: Colors.red,
+              ),
             ),
           ),
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(CartScreen.routeName);
-            },
-            icon: Icon(
-              Icons.shopping_cart,
-              color: Colors.white,
+          Badge(
+            badgeColor: Colors.purpleAccent,
+            animationType: BadgeAnimationType.scale,
+            toAnimate: true,
+            position: BadgePosition.topEnd(
+              top: 6,
+              end: 6,
+            ),
+            badgeContent: Text(
+              cartProvder.getAllCartItem.length.toString(),
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(CartScreen.routeName);
+              },
+              icon: Icon(
+                Icons.shopping_cart,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           ),
         ],

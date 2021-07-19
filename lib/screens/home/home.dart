@@ -108,7 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              padding: const EdgeInsets.only(
+                  right: 16, left: 16, top: 16, bottom: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -152,7 +153,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   customInkWel(
-                    onTap: () => Navigator.of(context).pushNamed(FeedsScreen.routeName, arguments: 'popular'),
+                    onTap: () => Navigator.of(context)
+                        .pushNamed(FeedsScreen.routeName, arguments: 'popular'),
                     child: Text(
                       'View more...',
                       style: TextStyle(

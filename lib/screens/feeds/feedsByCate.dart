@@ -1,5 +1,10 @@
+import 'package:badges/badges.dart';
+import 'package:ecommerce/provider/cart_provider.dart';
 import 'package:ecommerce/provider/product_provider.dart';
+import 'package:ecommerce/provider/wishlist_provider.dart';
+import 'package:ecommerce/screens/cart/cart.dart';
 import 'package:ecommerce/screens/feeds/widget/feeds_product.dart';
+import 'package:ecommerce/screens/wishlist/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +20,61 @@ class FeedsByCategoryScreen extends StatelessWidget {
     final productList = _productProvider.productByCategory(categoryName);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Feeds"),
+        title: Text(categoryName),
+        actions: [
+          Consumer<WishListProvider>(
+            builder: (context, wlProvider, child) => Badge(
+              badgeColor: Colors.pink,
+              animationType: BadgeAnimationType.scale,
+              toAnimate: true,
+              position: BadgePosition.topEnd(
+                top: 6,
+                end: 6,
+              ),
+              badgeContent: Text(
+                wlProvider.getAllFavoriteItems.length.toString(),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(WishList.routeName);
+                },
+                icon: Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+          ),
+          Consumer<CartProvider>(
+            builder: (context, cartProvider, child) => Badge(
+              badgeColor: Colors.pinkAccent,
+              animationType: BadgeAnimationType.scale,
+              toAnimate: true,
+              position: BadgePosition.topEnd(
+                top: 6,
+                end: 6,
+              ),
+              badgeContent: Text(
+                cartProvider.getAllCartItem.length.toString(),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(CartScreen.routeName);
+                },
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -35,4 +94,3 @@ class FeedsByCategoryScreen extends StatelessWidget {
     );
   }
 }
- 

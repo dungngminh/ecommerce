@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:ecommerce/models/product.dart';
+import 'package:ecommerce/screens/feeds/widget/preview_dialog.dart';
 import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,8 @@ class _FeedsProductState extends State<FeedsProduct> {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: InkWell(
-        onTap: () => Navigator.of(context).pushNamed(ProductDetail.routeName, arguments: productAtributte.id),
+        onTap: () => Navigator.of(context)
+            .pushNamed(ProductDetail.routeName, arguments: productAtributte.id),
         child: Container(
           width: 250,
           height: 290,
@@ -118,7 +120,16 @@ class _FeedsProductState extends State<FeedsProduct> {
                         Material(
                           color: Colors.transparent,
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () async {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return PreviewDialog(
+                                    productId: productAtributte.id,
+                                  );
+                                },
+                              );
+                            },
                             borderRadius: BorderRadius.circular(18),
                             child: const Icon(
                               Icons.more_horiz,

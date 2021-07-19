@@ -123,15 +123,18 @@ class _UserScreenState extends State<UserScreen> {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    userListTile('Wishlist', 0,
+                    userListTile(
+                      'Wishlist',
+                      0,
+                      color: Colors.red,
+                      trailing: Icon(
+                        Icons.chevron_right_outlined,
                         color: Colors.red,
-                        trailing: Icon(
-                          Icons.chevron_right_outlined,
-                          color: Colors.red,
-                        ),
-                        navigator: () => Navigator.of(context).pushNamed(
-                              WishList.routeName,
-                            )),
+                      ),
+                      navigator: () => Navigator.of(context).pushNamed(
+                        WishList.routeName,
+                      ),
+                    ),
                     userListTile(
                       'Cart',
                       1,

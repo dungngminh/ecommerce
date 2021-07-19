@@ -1,4 +1,5 @@
 import 'package:ecommerce/provider/dark_theme_provider.dart';
+import 'package:ecommerce/screens/feeds/feeds.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +47,8 @@ class EmptyCart extends StatelessWidget {
             width: size.width * 0.8,
             height: size.height * 0.05,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () =>
+                  Navigator.pushNamed(context, FeedsScreen.routeName),
               child: Text(
                 'Shop now'.toUpperCase(),
                 textAlign: TextAlign.center,
