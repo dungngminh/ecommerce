@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:ecommerce/models/product.dart';
 import 'package:ecommerce/provider/cart_provider.dart';
-import 'package:ecommerce/provider/product_provider.dart';
+import 'package:ecommerce/provider/wishlist_provider.dart';
 import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -13,18 +13,10 @@ class PopularProduct extends StatefulWidget {
 }
 
 class _PopularProductState extends State<PopularProduct> {
-  bool _isSelect = false;
-
-  changeColor() {
-    setState(() {
-      _isSelect = !_isSelect;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final productAttribute = Provider.of<Product>(context);
-
+    final wishListProvider = Provider.of<WishListProvider>(context);
     final cartProvider = Provider.of<CartProvider>(context);
     return InkWell(
       onTap: () => Navigator.pushNamed(context, ProductDetail.routeName,
@@ -57,10 +49,20 @@ class _PopularProductState extends State<PopularProduct> {
                     color: Colors.transparent,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(24),
-                      onTap: changeColor,
+                      onTap: () {
+                        wishListProvider.addAndRemoveToWishList(
+                          productAttribute.id,
+                          productAttribute.title,
+                          productAttribute.price,
+                          productAttribute.imageSrc,
+                        );
+                      },
                       child: Icon(
                         Icons.favorite,
-                        color: _isSelect ? Colors.red : Colors.grey,
+                        color: wishListProvider.getAllFavoriteItems
+                                .containsKey(productAttribute.id)
+                            ? Colors.red
+                            : Colors.grey,
                       ),
                     ),
                   ),

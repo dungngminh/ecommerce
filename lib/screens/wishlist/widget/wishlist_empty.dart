@@ -1,4 +1,5 @@
 import 'package:ecommerce/provider/dark_theme_provider.dart';
+import 'package:ecommerce/screens/feeds/feeds.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +49,8 @@ class EmptyWishlist extends StatelessWidget {
             width: size.width * 0.5,
             height: size.height * 0.05,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () =>
+                  Navigator.pushNamed(context, FeedsScreen.routeName),
               child: Text(
                 'Add a wish'.toUpperCase(),
                 textAlign: TextAlign.center,

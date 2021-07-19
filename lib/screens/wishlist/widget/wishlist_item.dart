@@ -1,15 +1,26 @@
+import 'package:ecommerce/models/favorite_item.dart';
+import 'package:ecommerce/provider/wishlist_provider.dart';
+import 'package:ecommerce/screens/inner_screen/product_detail.dart';
+import 'package:ecommerce/utils/helper_method.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class WishlistFull extends StatefulWidget {
-  const WishlistFull({Key? key}) : super(key: key);
+class WishListItem extends StatefulWidget {
+  final String productId;
+  const WishListItem({Key? key, required this.productId}) : super(key: key);
 
   @override
-  _WishlistFullState createState() => _WishlistFullState();
+  _WishListItemState createState() => _WishListItemState();
 }
 
-class _WishlistFullState extends State<WishlistFull> {
+class _WishListItemState extends State<WishListItem> {
   @override
   Widget build(BuildContext context) {
+    //attributes and providers
+    HelperMethod helperMethod = new HelperMethod();
+    final favoriteItem = Provider.of<FavoriteItem>(context);
+    final wishlistProvider = Provider.of<WishListProvider>(context);
+    print("Wishlist" + widget.productId);
     return Stack(
       children: [
         Container(
@@ -25,7 +36,11 @@ class _WishlistFullState extends State<WishlistFull> {
             borderRadius: BorderRadius.circular(5),
             elevation: 3,
             child: InkWell(
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(
+                context,
+                ProductDetail.routeName,
+                arguments: widget.productId,
+              ),
               child: Container(
                 padding: EdgeInsets.all(16),
                 child: Row(
@@ -33,10 +48,11 @@ class _WishlistFullState extends State<WishlistFull> {
                   children: [
                     Container(
                       height: 80,
-                      child: Image.asset('assets/images/image_demo/g17.jpg'),
+                      width: 100,
+                      child: Image.network(favoriteItem.imageSrc),
                     ),
                     SizedBox(
-                      width: 8,
+                      width: 18,
                     ),
                     Expanded(
                       child: Padding(
@@ -47,7 +63,7 @@ class _WishlistFullState extends State<WishlistFull> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Hello',
+                              favoriteItem.title,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
@@ -58,7 +74,7 @@ class _WishlistFullState extends State<WishlistFull> {
                               height: 10,
                             ),
                             Text(
-                              '\$16',
+                              '\$${favoriteItem.price}',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -75,30 +91,34 @@ class _WishlistFullState extends State<WishlistFull> {
             ),
           ),
         ),
-        positionedRemove(),
-      ],
-    );
-  }
-
-  Widget positionedRemove() {
-    return Positioned(
-      top: 20,
-      right: 15,
-      child: Container(
-        height: 30,
-        width: 30,
-        child: MaterialButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-          padding: EdgeInsets.all(0.0),
-          color: Colors.red,
-          child: Icon(
-            Icons.clear,
-            color: Colors.white,
+        //Remove Button
+        Positioned(
+          top: 20,
+          right: 15,
+          child: Container(
+            height: 30,
+            width: 30,
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0)),
+              padding: EdgeInsets.all(0.0),
+              color: Colors.red,
+              child: Icon(
+                Icons.clear,
+                color: Colors.white,
+              ),
+              onPressed: () => helperMethod.showAlertDialog(
+                title: 'Remove Favorite Item',
+                subtitle: 'Are you sure?',
+                callBackFunc: () => wishlistProvider.removeItem(
+                  id: widget.productId,
+                ),
+                context: context,
+              ),
+            ),
           ),
-          onPressed: () {},
         ),
-      ),
+      ],
     );
   }
 }

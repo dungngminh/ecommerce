@@ -1,6 +1,7 @@
 import 'package:ecommerce/provider/cart_provider.dart';
 import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/provider/product_provider.dart';
+import 'package:ecommerce/provider/wishlist_provider.dart';
 import 'package:ecommerce/screens/cart/cart.dart';
 import 'package:ecommerce/screens/feeds/widget/feeds_product.dart';
 import 'package:ecommerce/screens/wishlist/wishlist.dart';
@@ -27,18 +28,20 @@ class _ProductDetailState extends State<ProductDetail> {
     final productList = productProvider.products;
 
     final productId = ModalRoute.of(context)!.settings.arguments as String;
-    // print(productId);
+    print("detail" + productId);
     final productAttribute = productProvider.productById(productId);
 
     //cartProvider
     final cartProvder = Provider.of<CartProvider>(context);
+
+    //wishlistProvider
+    final wishListProvider = Provider.of<WishListProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
+        backgroundColor: Theme.of(context).primaryColor,
+        elevation: 5,
         title: Text(
-          'DETAIL',
+          productAttribute.id,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.normal,
@@ -50,8 +53,11 @@ class _ProductDetailState extends State<ProductDetail> {
               Navigator.of(context).pushNamed(WishList.routeName);
             },
             icon: Icon(
-              Icons.favorite_border,
-              color: Colors.red,
+              Icons.favorite,
+              color: wishListProvider.getAllFavoriteItems
+                      .containsKey(productAttribute.id)
+                  ? Colors.red
+                  : Colors.white,
             ),
           ),
           IconButton(
@@ -60,7 +66,7 @@ class _ProductDetailState extends State<ProductDetail> {
             },
             icon: Icon(
               Icons.shopping_cart,
-              color: Theme.of(context).primaryColor,
+              color: Colors.white,
             ),
           ),
         ],
@@ -320,6 +326,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     height: 50,
                     child: ElevatedButton(
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
                             'BUY NOW',
@@ -331,7 +338,7 @@ class _ProductDetailState extends State<ProductDetail> {
                           ),
                           Icon(
                             Icons.payment,
-                            color: Colors.grey,
+                            color: Colors.green,
                             size: 19,
                           ),
                         ],
@@ -345,12 +352,21 @@ class _ProductDetailState extends State<ProductDetail> {
                   child: Container(
                     height: 50,
                     child: Material(
-                      color: Colors.transparent,
+                      color: Colors.grey,
                       child: InkWell(
+                        onTap: () => wishListProvider.addAndRemoveToWishList(
+                          productAttribute.id,
+                          productAttribute.title,
+                          productAttribute.price,
+                          productAttribute.imageSrc,
+                        ),
                         child: Center(
                           child: Icon(
-                            Icons.favorite_border,
-                            color: Colors.white,
+                            Icons.favorite,
+                            color: wishListProvider.getAllFavoriteItems
+                                    .containsKey(productAttribute.id)
+                                ? Colors.red
+                                : Colors.white,
                           ),
                         ),
                       ),

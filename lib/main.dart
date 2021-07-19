@@ -1,6 +1,7 @@
 import 'package:ecommerce/provider/cart_provider.dart';
 import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/provider/product_provider.dart';
+import 'package:ecommerce/provider/wishlist_provider.dart';
 import 'package:ecommerce/screens/cart/cart.dart';
 import 'package:ecommerce/screens/feeds/feeds.dart';
 import 'package:ecommerce/screens/feeds/feedsByCate.dart';
@@ -47,6 +48,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => CartProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => WishListProvider(),
         ),
       ],
       child: Consumer<DarkThemeProvider>(
