@@ -40,8 +40,7 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void reduceItemFromCart(
-      String id, String title, double price, String imageSrc) {
+  void reduceItemFromCart({required String id}) {
     if (_cartItems.containsKey(id)) {
       _cartItems.update(
         id,
@@ -57,7 +56,7 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeItem(String id) {
+  void removeItem({required String id}) {
     _cartItems.remove(id);
     notifyListeners();
   }

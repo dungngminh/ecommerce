@@ -2,6 +2,7 @@ import 'package:ecommerce/models/cart_item.dart';
 import 'package:ecommerce/provider/cart_provider.dart';
 import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:ecommerce/utils/constant.dart';
+import 'package:ecommerce/utils/helper_method.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:provider/provider.dart';
@@ -17,62 +18,11 @@ class CartItemWidget extends StatefulWidget {
 class _CartItemWidgetState extends State<CartItemWidget> {
   @override
   Widget build(BuildContext context) {
+    HelperMethod helperMethod = new HelperMethod();
     var size = MediaQuery.of(context).size;
     final cartItemAttribute = Provider.of<CartItem>(context);
     final cartProvider = Provider.of<CartProvider>(context);
     var subTotal = cartItemAttribute.price * cartItemAttribute.quantity;
-
-    Future<void> _showDialog(
-        String title, String subtitle, Function() fn) async {
-      showDialog(
-        context: (context),
-        builder: (context) {
-          return AlertDialog(
-            title: Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    right: 10,
-                  ),
-                  child: Placeholder( // ICON
-                    fallbackWidth: 20,
-                    fallbackHeight: 20,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            content: Text(subtitle),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  fn();
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'OK',
-                ),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'Cancel',
-                ),
-              ),
-            ],
-          );
-        },
-      );
-    }
 
     return InkWell(
       onTap: () => Navigator.of(context).pushNamed(
@@ -126,10 +76,13 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                         color: Colors.transparent,
                         child: InkWell(
                           borderRadius: BorderRadius.circular(32),
-                          onTap: () => _showDialog(
-                            'Remove Item',
-                            'Are you sure?',
-                            () => cartProvider.removeItem(widget.productId),
+                          onTap: () => helperMethod.showAlertDialog(
+                            title: 'Remove Item',
+                            subtitle: 'Are you sure?',
+                            callBackFunc: () => cartProvider.removeItem(
+                              id: widget.productId,
+                            ),
+                            context: context,
                           ),
                           child: Container(
                             margin: const EdgeInsets.only(right: 5),
@@ -217,10 +170,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                               onTap: cartItemAttribute.quantity == 1
                                   ? () {}
                                   : () => cartProvider.reduceItemFromCart(
-                                        widget.productId,
-                                        cartItemAttribute.title,
-                                        cartItemAttribute.price,
-                                        cartItemAttribute.imageSrc,
+                                        id: widget.productId,
                                       ),
                               child: Container(
                                 height: 25,

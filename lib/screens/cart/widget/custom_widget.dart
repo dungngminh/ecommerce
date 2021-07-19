@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-Widget checkoutSection(BuildContext context) {
+Widget checkoutSection(BuildContext context, double subTotal) {
   return Container(
     child: Padding(
-      padding: const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 35),
+      padding: const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 10),
       child: Row(
         children: [
           Expanded(
@@ -43,7 +43,7 @@ Widget checkoutSection(BuildContext context) {
                   ),
                 ),
                 Text(
-                  '\$450',
+                  '\$ ${subTotal.toStringAsFixed(3)}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Theme.of(context).textSelectionTheme.selectionColor,
