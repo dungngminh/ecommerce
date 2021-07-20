@@ -83,14 +83,21 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
           padding: const EdgeInsets.all(3.0),
-          child: FloatingActionButton(
-            backgroundColor: Theme.of(context).primaryColor,
-            tooltip: 'Search',
-            elevation: 5,
-            onPressed: () {},
-            child: Icon(
-              kSearch,
-              color: Colors.white,
+          child: Visibility(
+            visible: MediaQuery.of(context).viewInsets.bottom == 0.0, // hide fab when keyboard push
+            child: FloatingActionButton(
+              backgroundColor: Theme.of(context).primaryColor,
+              tooltip: 'Search',
+              elevation: 5,
+              onPressed: () {
+                setState(() {
+                  _selectedIndex = 2;
+                });
+              },
+              child: Icon(
+                kSearch,
+                color: Colors.white,
+              ),
             ),
           ),
         ));

@@ -108,7 +108,7 @@ class _ProductDetailState extends State<ProductDetail> {
         children: [
           Container(
             foregroundDecoration: BoxDecoration(color: Colors.black12),
-            height: size.height * 0.48,
+            height: size.height * 0.42,
             width: double.infinity,
             child:
                 Image.network(productAttribute.imageSrc, fit: BoxFit.contain),
@@ -324,6 +324,9 @@ class _ProductDetailState extends State<ProductDetail> {
                       );
                     },
                   ),
+                ),
+                SizedBox(
+                  height: 20,
                 ),
               ],
             ),

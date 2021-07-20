@@ -10,16 +10,21 @@ class ProductProvider with ChangeNotifier {
           .contains(productCategory.toLowerCase()))
       .toList();
 
-  List<Product> productByBrand(String brand)=>_products
-          .where((element) =>
-              element.brand.toLowerCase().contains(brand.toLowerCase()))
-          .toList();
+  List<Product> productByBrand(String brand) => _products
+      .where((element) =>
+          element.brand.toLowerCase().contains(brand.toLowerCase()))
+      .toList();
 
   List<Product> get popularProduct =>
       _products.where((element) => element.isPopular).toList();
 
   Product productById(String id) => _products.firstWhere(
       (element) => element.id.toLowerCase().contains(id.toLowerCase()));
+
+  List<Product> searchProduct(String keyword) => _products
+      .where((element) =>
+          element.title.toLowerCase().contains(keyword.toLowerCase()))
+      .toList();
 
   final List<Product> _products = [
     Product(
