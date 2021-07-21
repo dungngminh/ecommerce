@@ -1,0 +1,32 @@
+import 'package:ecommerce/utils/constant.dart';
+import 'package:ecommerce/widget/textfield_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class EmailField extends StatelessWidget {
+  final String hintText;
+  final IconData icon;
+  final ValueChanged<String> onChanged;
+  
+  const EmailField({
+    Key? key, required this.hintText, required this.icon, required this.onChanged,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFieldWidget(
+      child: TextField(
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          icon: Icon(
+            icon,
+            color: kPrimaryColor,
+          ),
+          hintText: hintText,
+          hintStyle: GoogleFonts.openSans(fontWeight: FontWeight.w300),
+          border: InputBorder.none,
+        ),
+      ),
+    );
+  }
+}

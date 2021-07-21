@@ -14,7 +14,7 @@ class BottomBarScreen extends StatefulWidget {
 }
 
 class _BottomBarScreenState extends State<BottomBarScreen> {
-  int _selectedIndex = 3;
+  int _selectedIndex = 0;
   late List<Map<String, Object>> _pages;
 
   @override
@@ -84,7 +84,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.all(3.0),
           child: Visibility(
-            visible: MediaQuery.of(context).viewInsets.bottom == 0.0, // hide fab when keyboard push
+            visible: MediaQuery.of(context).viewInsets.bottom ==
+                0.0, // hide fab when keyboard push
             child: FloatingActionButton(
               backgroundColor: Theme.of(context).primaryColor,
               tooltip: 'Search',

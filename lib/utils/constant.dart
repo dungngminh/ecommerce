@@ -6,7 +6,8 @@ Color kblack = Color(0xFF000000);
 Color kwhite = Color(0xFFFFFFFF);
 Color kTitle = Color(0xDD00000);
 Color kSubTitle = Color(0x8A00000);
-
+const kPrimaryColor = Color(0xFF6F35A5);
+const kPrimaryLightColor = Color(0xFFF1E6FF);
 Color favColor = Color(0xFFF44336);
 Color favBadgeColor = Color(0xFFE57373);
 

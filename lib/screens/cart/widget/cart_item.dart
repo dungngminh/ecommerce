@@ -4,7 +4,6 @@ import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/utils/helper_method.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:provider/provider.dart';
 
 class CartItemWidget extends StatefulWidget {
@@ -88,11 +87,9 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                             margin: const EdgeInsets.only(right: 5),
                             height: 25,
                             width: 25,
-                            child: Image(
-                              image: Svg(
-                                'assets/icons/cross.svg',
-                                color: Colors.red,
-                              ),
+                            child: Icon(
+                              Icons.remove,
+                              color: Colors.red,
                             ),
                           ),
                         ),
