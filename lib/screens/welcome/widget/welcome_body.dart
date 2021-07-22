@@ -1,4 +1,5 @@
 import 'package:ecommerce/screens/authen/login_screen.dart';
+import 'package:ecommerce/screens/authen/signup_screen.dart';
 import 'package:ecommerce/screens/welcome/widget/welcome_background.dart';
 import 'package:ecommerce/widget/button.dart';
 import 'package:ecommerce/utils/constant.dart';
@@ -41,7 +42,7 @@ class WelcomeBody extends StatelessWidget {
             ),
             ButtonWidget(
               text: 'SIGN UP',
-              onPressed: () {},
+              onPressed: () =>Navigator.pushNamed(context, SignUpScreen.routeName),
               color: kPrimaryLightColor,
               textColor: Colors.black,
             ),

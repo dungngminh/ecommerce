@@ -11,10 +11,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SignUpBody extends StatelessWidget {
-  const SignUpBody({
-    Key? key,
-  }) : super(key: key);
+class SignUpBody extends StatefulWidget {
+  @override
+  _SignUpBodyState createState() => _SignUpBodyState();
+}
+
+class _SignUpBodyState extends State<SignUpBody> {
+  String emailInput = '';
+  String passwordInput = '';
+
+  String rePasswordInput = '';
+
+  final _key = GlobalKey<FormState>();
+
+  void _submit() {
+    FocusScope.of(context).unfocus();
+    if (_key.currentState!.validate()) {
+      print(true);
+      _key.currentState!.save();
+    } else
+      print('fail');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,15 +60,41 @@ class SignUpBody extends StatelessWidget {
             SizedBox(
               height: size.height * 0.01,
             ),
-            EmailField(
-                hintText: 'Your Email',
-                icon: Icons.person,
-                onChanged: (String value) {}),
-            PasswordField(onChanged: (String value) {}),
-            PasswordField(isRepeat: true, onChanged: (String value) {}),
-            ButtonWidget(text: 'SIGN IN', onPressed: () {}),
+            Form(
+              key: _key,
+              child: Column(
+                children: [
+                  EmailField(
+                    hintText: 'Your Email',
+                    icon: Icons.person,
+                    onChanged: (String value) {
+                      setState(() {
+                        emailInput = value;
+                      });
+                    },
+                  ),
+                  PasswordField(
+                    nextAction: TextInputAction.next,
+                    onChanged: (String value) {
+                      setState(() {
+                        passwordInput = value;
+                      });
+                    },
+                  ),
+                  PasswordField(
+                    onCompleted: _submit,
+                    password: passwordInput,
+                    isRepeat: true,
+                    onChanged: (String value) {
+                      rePasswordInput = value;
+                    },
+                  ),
+                ],
+              ),
+            ),
+            ButtonWidget(text: 'SIGN IN', onPressed: _submit),
             SizedBox(
-              height: size.height * 0.01,
+              height: size.height * 0.015,
             ),
             CheckHavingAccountStatus(
               function: () => Navigator.pushNamed(
