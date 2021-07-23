@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce/utils/extension.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 //COLOR
 Color kblack = Color(0xFF000000);
@@ -50,7 +51,7 @@ ThemeData themeData(bool isDarkMode, BuildContext context) {
       backwardsCompatibility: false,
       elevation: 0,
       backgroundColor: isDarkMode ? kPrimaryColor : '6200ee'.toColor(),
-      titleTextStyle: TextStyle(
+      titleTextStyle: GoogleFonts.poppins(
           color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(

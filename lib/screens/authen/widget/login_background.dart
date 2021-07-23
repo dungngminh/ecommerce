@@ -5,7 +5,6 @@ class LoginBackground extends StatelessWidget {
 
   const LoginBackground({Key? key, required this.child}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -24,8 +23,8 @@ class LoginBackground extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 0,
-            right: 0,
+            bottom: -5,
+            right: -20,
             child: Image.asset(
               'assets/images/login_bottom.png',
               width: size.width * 0.4,

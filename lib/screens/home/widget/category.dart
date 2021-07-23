@@ -1,5 +1,6 @@
 import 'package:ecommerce/screens/feeds/feedsByCate.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoryWidget extends StatelessWidget {
   CategoryWidget({required int index}) : _index = index;
@@ -62,7 +63,7 @@ class CategoryWidget extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Text(
                   _categories[_index]['name'] as String,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w500,
                     fontSize: 15,
                     color: Theme.of(context).textSelectionTheme.selectionColor,

@@ -3,6 +3,7 @@ import 'package:ecommerce/provider/wishlist_provider.dart';
 import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:ecommerce/utils/helper_method.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class WishListItem extends StatefulWidget {
@@ -64,7 +65,7 @@ class _WishListItemState extends State<WishListItem> {
                           children: [
                             Text(
                               favoriteItem.title,
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -75,7 +76,7 @@ class _WishListItemState extends State<WishListItem> {
                             ),
                             Text(
                               '\$${favoriteItem.price}',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,

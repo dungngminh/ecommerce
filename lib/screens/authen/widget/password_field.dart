@@ -49,7 +49,7 @@ class _PasswordFieldState extends State<PasswordField> {
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: widget.isRepeat ? 'Repeat Password ' : 'Password',
-              hintStyle: GoogleFonts.openSans(fontWeight: FontWeight.w300),
+              hintStyle: GoogleFonts.poppins(),
               icon: Icon(
                 Icons.lock,
                 color: kPrimaryColor,

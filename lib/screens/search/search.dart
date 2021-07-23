@@ -4,6 +4,7 @@ import 'package:ecommerce/screens/feeds/widget/feeds_product.dart';
 import 'package:ecommerce/screens/search/widget/searchByHeader.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -53,7 +54,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   children: [
                     TextSpan(
                       text: "Search",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                         fontSize: 24,
@@ -134,7 +135,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       Text(
                         'No results found',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                             fontSize: 30, fontWeight: FontWeight.w700),
                       ),
                     ],

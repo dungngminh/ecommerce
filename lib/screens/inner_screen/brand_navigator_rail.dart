@@ -1,5 +1,6 @@
 import 'package:ecommerce/provider/product_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'brand_rail.dart';
@@ -150,14 +151,14 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
                           ),
                         ],
                       ),
-                      selectedLabelTextStyle: TextStyle(
+                      selectedLabelTextStyle: GoogleFonts.poppins(
                         color: Color(0xffffe6bc97),
                         fontSize: 20,
                         letterSpacing: 1,
                         decoration: TextDecoration.underline,
                         decorationThickness: 2.5,
                       ),
-                      unselectedLabelTextStyle: TextStyle(
+                      unselectedLabelTextStyle: GoogleFonts.poppins(
                         fontSize: 15,
                         letterSpacing: 0.5,
                       ),

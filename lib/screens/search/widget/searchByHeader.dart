@@ -5,6 +5,7 @@ import 'package:ecommerce/screens/cart/cart.dart';
 import 'package:ecommerce/screens/wishlist/wishlist.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class SearchByHeader extends SliverPersistentHeaderDelegate {
@@ -66,7 +67,7 @@ class SearchByHeader extends SliverPersistentHeaderDelegate {
                     position: BadgePosition.topEnd(top: 4, end: 6),
                     badgeContent: Text(
                       wishListProvider.getAllFavoriteItems.length.toString(),
-                      style: TextStyle(color: kwhite),
+                      style: GoogleFonts.poppins(color: kwhite),
                     ),
                     child: IconButton(
                       icon: Icon(Icons.favorite, color: Colors.red),
@@ -82,7 +83,7 @@ class SearchByHeader extends SliverPersistentHeaderDelegate {
                     position: BadgePosition.topEnd(top: 4, end: 6),
                     badgeContent: Text(
                       cartProvider.getAllCartItem.length.toString(),
-                      style: TextStyle(color: kwhite),
+                      style: GoogleFonts.poppins(color: kwhite),
                     ),
                     child: IconButton(
                       icon: Icon(

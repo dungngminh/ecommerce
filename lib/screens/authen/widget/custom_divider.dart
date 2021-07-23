@@ -5,7 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomDividerWidget extends StatelessWidget {
   final String title;
   const CustomDividerWidget({
-    Key? key, required this.title,
+    Key? key,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -22,9 +23,10 @@ class CustomDividerWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
               title.toUpperCase(),
-              style: GoogleFonts.openSans(
+              style: GoogleFonts.poppins(
                 color: kPrimaryColor,
                 fontWeight: FontWeight.w600,
+                fontSize: 16,
               ),
             ),
           ),

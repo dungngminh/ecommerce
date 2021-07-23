@@ -22,11 +22,11 @@ class EmailField extends StatelessWidget {
       child: TextFormField(
         textInputAction: TextInputAction.next,
         validator: (value) {
-            return RegExp(
-                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                    .hasMatch(value!)
-                ? null
-                : "Please provide a valid email";
+          return RegExp(
+                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                  .hasMatch(value!)
+              ? null
+              : "Please provide a valid email";
         },
         onChanged: onChanged,
         decoration: InputDecoration(
@@ -35,7 +35,7 @@ class EmailField extends StatelessWidget {
             color: kPrimaryColor,
           ),
           hintText: hintText,
-          hintStyle: GoogleFonts.openSans(fontWeight: FontWeight.w300),
+          hintStyle: GoogleFonts.poppins(),
           border: InputBorder.none,
         ),
       ),

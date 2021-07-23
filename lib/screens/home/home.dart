@@ -8,6 +8,7 @@ import 'package:ecommerce/screens/home/widget/custom_swiper.dart';
 import 'package:ecommerce/screens/home/widget/popular_product.dart';
 import 'package:ecommerce/widget/inkwel_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -78,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     'Categories',
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w800,
                       fontSize: 20,
                       color:
@@ -115,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     'Popular Brands',
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w800,
                       fontSize: 20,
                       color:
@@ -126,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {},
                     child: Text(
                       'View more...',
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w800,
                         fontSize: 16,
                         color: Colors.red,
@@ -145,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     'Popular Product',
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w800,
                       fontSize: 20,
                       color:
@@ -157,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         .pushNamed(FeedsScreen.routeName, arguments: 'popular'),
                     child: Text(
                       'View more...',
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w800,
                         fontSize: 16,
                         color: Colors.red,

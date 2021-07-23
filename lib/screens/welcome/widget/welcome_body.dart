@@ -19,7 +19,7 @@ class WelcomeBody extends StatelessWidget {
             Text(
               'welcome to shop app'.toUpperCase(),
               // textAlign: TextAlign.center,
-              style: GoogleFonts.openSans(
+              style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
                 color: kPrimaryColor,
@@ -42,7 +42,8 @@ class WelcomeBody extends StatelessWidget {
             ),
             ButtonWidget(
               text: 'SIGN UP',
-              onPressed: () =>Navigator.pushNamed(context, SignUpScreen.routeName),
+              onPressed: () =>
+                  Navigator.pushNamed(context, SignUpScreen.routeName),
               color: kPrimaryLightColor,
               textColor: Colors.black,
             ),

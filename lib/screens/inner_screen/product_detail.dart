@@ -8,6 +8,7 @@ import 'package:ecommerce/screens/feeds/widget/feeds_product.dart';
 import 'package:ecommerce/screens/wishlist/wishlist.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetail extends StatefulWidget {
@@ -47,7 +48,7 @@ class _ProductDetailState extends State<ProductDetail> {
         elevation: 5,
         title: Text(
           productAttribute.title,
-          style: TextStyle(
+          style: GoogleFonts.poppins(
             fontSize: 18,
             color: themeProvider.darkTheme ? Colors.white : Colors.black,
             fontWeight: FontWeight.normal,
@@ -64,7 +65,7 @@ class _ProductDetailState extends State<ProductDetail> {
             ),
             badgeContent: Text(
               wishListProvider.getAllFavoriteItems.length.toString(),
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 color: Colors.white,
               ),
             ),
@@ -88,7 +89,7 @@ class _ProductDetailState extends State<ProductDetail> {
             ),
             badgeContent: Text(
               cartProvder.getAllCartItem.length.toString(),
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 color: Colors.white,
               ),
             ),
@@ -173,7 +174,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               child: Text(
                                 productAttribute.title,
                                 maxLines: 2,
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                   fontSize: 28,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -184,7 +185,7 @@ class _ProductDetailState extends State<ProductDetail> {
                             ),
                             Text(
                               '\$ ${productAttribute.price}',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 color: themeProvider.darkTheme
                                     ? Theme.of(context).disabledColor
                                     : Colors.black,
@@ -211,7 +212,7 @@ class _ProductDetailState extends State<ProductDetail> {
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
                           productAttribute.description,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w400,
                             fontSize: 21,
                             color: themeProvider.darkTheme
@@ -260,7 +261,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               padding: EdgeInsets.all(8),
                               child: Text(
                                 'No reviews yet',
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                   color: Theme.of(context)
                                       .textSelectionTheme
                                       .selectionColor,
@@ -273,7 +274,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               padding: EdgeInsets.all(2),
                               child: Text(
                                 'Be the first review!',
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                   fontStyle: FontStyle.italic,
                                   fontWeight: FontWeight.w300,
                                   fontSize: 20,
@@ -303,7 +304,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   color: Theme.of(context).scaffoldBackgroundColor,
                   child: Text(
                     'Suggested products: ',
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                     ),
@@ -351,7 +352,7 @@ class _ProductDetailState extends State<ProductDetail> {
                           productAttribute.imageSrc),
                       child: Text(
                         'ADD TO CART',
-                        style: TextStyle(fontSize: 16, color: kwhite),
+                        style: GoogleFonts.poppins(fontSize: 16, color: kwhite),
                       ),
                     ),
                   ),
@@ -366,7 +367,7 @@ class _ProductDetailState extends State<ProductDetail> {
                         children: [
                           Text(
                             'BUY NOW',
-                            style: TextStyle(
+                            style: GoogleFonts.poppins(
                                 fontSize: 14,
                                 color: Theme.of(context)
                                     .textSelectionTheme
@@ -427,7 +428,7 @@ class _ProductDetailState extends State<ProductDetail> {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               color: Theme.of(context).textSelectionTheme.selectionColor,
               fontWeight: FontWeight.bold,
               fontSize: 21.0,
@@ -435,7 +436,7 @@ class _ProductDetailState extends State<ProductDetail> {
           ),
           Text(
             info,
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               fontWeight: FontWeight.w400,
               fontSize: 20,
               color:

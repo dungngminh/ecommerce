@@ -3,6 +3,7 @@ import 'package:ecommerce/models/product.dart';
 import 'package:ecommerce/screens/feeds/widget/preview_dialog.dart';
 import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class FeedsProduct extends StatefulWidget {
@@ -56,9 +57,9 @@ class _FeedsProductState extends State<FeedsProduct> {
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(8),
                       ),
-                      badgeContent: const Text(
+                      badgeContent: Text(
                         'New',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           color: Colors.white,
                         ),
                       ),
@@ -79,7 +80,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                       productAtributte.title,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 15,
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
@@ -89,7 +90,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
                         '\$ ${productAtributte.price}',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 18,
                           color: Colors.black,
                           fontWeight: FontWeight.w900,
@@ -102,7 +103,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                         Row(children: [
                           Text(
                             'Quantity:',
-                            style: TextStyle(
+                            style: GoogleFonts.poppins(
                               fontSize: 12,
                               color: Colors.grey,
                               fontWeight: FontWeight.w600,
@@ -110,7 +111,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                           ),
                           Text(
                             '${productAtributte.quantity}',
-                            style: TextStyle(
+                            style: GoogleFonts.poppins(
                               fontSize: 12,
                               color: Colors.red,
                               fontWeight: FontWeight.w600,

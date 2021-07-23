@@ -1,6 +1,7 @@
 import 'package:ecommerce/models/product.dart';
 import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class BrandsNavigationRail extends StatelessWidget {
@@ -57,7 +58,7 @@ class BrandsNavigationRail extends StatelessWidget {
                     Text(
                       productAtributte.title,
                       maxLines: 4,
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w700,
                         fontSize: 20,
                         color:
@@ -70,7 +71,7 @@ class BrandsNavigationRail extends StatelessWidget {
                     FittedBox(
                       child: Text('\$ ${productAtributte.price}',
                           maxLines: 1,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             color: Colors.red,
                             fontSize: 24,
                           )),
@@ -79,7 +80,8 @@ class BrandsNavigationRail extends StatelessWidget {
                       height: 20.0,
                     ),
                     Text(productAtributte.productCategory,
-                        style: TextStyle(color: Colors.grey, fontSize: 18.0)),
+                        style: GoogleFonts.poppins(
+                            color: Colors.grey, fontSize: 18.0)),
                     SizedBox(
                       height: 18,
                     ),

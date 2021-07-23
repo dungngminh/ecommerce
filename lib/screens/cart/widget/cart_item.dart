@@ -4,6 +4,7 @@ import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/utils/helper_method.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class CartItemWidget extends StatefulWidget {
@@ -64,7 +65,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                           cartItemAttribute.title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w600,
                             color: kblack,
                             fontSize: 16,
@@ -103,7 +104,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                     children: [
                       Text(
                         'Price: ',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           color: Colors.black,
                         ),
                       ),
@@ -112,7 +113,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       ),
                       Text(
                         '\$ ${cartItemAttribute.price}',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -126,7 +127,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                     children: [
                       Text(
                         'Sub Total: ',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           color: Colors.black,
                         ),
                       ),
@@ -136,7 +137,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       FittedBox(
                         child: Text(
                           '\$' + subTotal.toStringAsFixed(2),
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 16,
                             fontWeight: FontWeight.w900,
                             color: Theme.of(context).accentColor,
@@ -149,7 +150,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                     children: [
                       Text(
                         'Free ship',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w800,
                           color: Theme.of(context).accentColor,
@@ -186,7 +187,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 cartItemAttribute.quantity.toString(),
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),

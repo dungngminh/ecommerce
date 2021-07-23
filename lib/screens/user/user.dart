@@ -6,6 +6,7 @@ import 'package:ecommerce/services/firebase_authenticate.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/utils/helper_method.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class UserScreen extends StatefulWidget {
@@ -95,7 +96,7 @@ class _UserScreenState extends State<UserScreen> {
                                   ),
                                   Text(
                                     'Kom Kat',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 20,
                                       color: kwhite,
                                     ),
@@ -203,7 +204,7 @@ class _UserScreenState extends State<UserScreen> {
   Widget userTile(String title) {
     return Text(
       title,
-      style: const TextStyle(
+      style: GoogleFonts.poppins(
         fontSize: 22,
         fontWeight: FontWeight.bold,
       ),

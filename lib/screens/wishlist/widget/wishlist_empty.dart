@@ -1,6 +1,7 @@
 import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/screens/feeds/feeds.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class EmptyWishlist extends StatelessWidget {
@@ -34,7 +35,7 @@ class EmptyWishlist extends StatelessWidget {
           ),
           Text(
             'Your Wishlist Is Empty',
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               color: themeChange.darkTheme
                   ? Theme.of(context).textSelectionTheme.selectionColor
                   : Colors.black87,
@@ -54,7 +55,7 @@ class EmptyWishlist extends StatelessWidget {
               child: Text(
                 'Add a wish'.toUpperCase(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
                 ),

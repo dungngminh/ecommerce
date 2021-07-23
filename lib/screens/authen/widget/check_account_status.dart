@@ -18,15 +18,16 @@ class CheckHavingAccountStatus extends StatelessWidget {
       children: [
         Text(
           type ? 'New user?  ' : 'Already have an Account? ',
-          style: GoogleFonts.openSans(
+          style: GoogleFonts.poppins(
             color: kPrimaryColor,
+            // fontSize: 1,
           ),
         ),
         GestureDetector(
           onTap: function,
           child: Text(
             type ? 'Sign Up!' : 'Sign in!',
-            style: GoogleFonts.openSans(
+            style: GoogleFonts.poppins(
               color: kPrimaryColor,
               fontWeight: FontWeight.bold,
             ),

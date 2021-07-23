@@ -42,7 +42,7 @@ class _SignUpBodyState extends State<SignUpBody> {
         final snackBar = SnackBar(
           content: Text(
             result ?? 'Successful',
-            style: GoogleFonts.openSans(
+            style: GoogleFonts.poppins(
               color: kPrimaryColor,
               fontWeight: FontWeight.bold,
             ),
@@ -80,7 +80,7 @@ class _SignUpBodyState extends State<SignUpBody> {
           result ?? 'Error occured! Please try again',
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
-          style: GoogleFonts.openSans(
+          style: GoogleFonts.poppins(
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,
           ),
@@ -119,7 +119,7 @@ class _SignUpBodyState extends State<SignUpBody> {
           children: [
             Text(
               'signup'.toUpperCase(),
-              style: GoogleFonts.openSans(
+              style: GoogleFonts.poppins(
                 color: kPrimaryColor,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -250,7 +250,7 @@ class _SignUpBodyState extends State<SignUpBody> {
         return AlertDialog(
           title: Text(
             'Choose option',
-            style: GoogleFonts.openSans(
+            style: GoogleFonts.poppins(
               fontWeight: FontWeight.bold,
               color: kPrimaryColor,
             ),
@@ -266,7 +266,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                   ),
                   title: Text(
                     'Camera',
-                    style: GoogleFonts.openSans(
+                    style: GoogleFonts.poppins(
                       fontSize: 16,
                     ),
                   ),
@@ -279,7 +279,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                   ),
                   title: Text(
                     'Gallery',
-                    style: GoogleFonts.openSans(
+                    style: GoogleFonts.poppins(
                       fontSize: 16,
                     ),
                   ),
@@ -293,7 +293,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                     ),
                     title: Text(
                       'Remove',
-                      style: GoogleFonts.openSans(
+                      style: GoogleFonts.poppins(
                         fontSize: 16,
                       ),
                     ),

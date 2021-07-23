@@ -3,6 +3,7 @@ import 'package:ecommerce/screens/feeds/feeds.dart';
 import 'package:ecommerce/screens/user/user.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class BackdropWidget extends StatelessWidget {
   const BackdropWidget({Key? key}) : super(key: key);
@@ -107,7 +108,7 @@ class BackdropWidget extends StatelessWidget {
                 Center(
                   child: Text(
                     'Cheems',
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
                       color: Colors.white,
@@ -154,7 +155,8 @@ class BackdropWidget extends StatelessWidget {
         children: [
           Text(
             content,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+            style: GoogleFonts.poppins(
+                fontWeight: FontWeight.bold, color: Colors.white),
           ),
           Icon(
             icon,

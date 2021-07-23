@@ -5,6 +5,7 @@ import 'package:ecommerce/screens/cart/widget/empty_cart.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/utils/helper_method.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatelessWidget {
@@ -23,7 +24,7 @@ class CartScreen extends StatelessWidget {
             appBar: AppBar(
               title: Text(
                 'Cart(${availableCartItemList.length})',
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   color: Colors.white,
                 ),
               ),

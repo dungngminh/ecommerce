@@ -7,6 +7,7 @@ import 'package:ecommerce/screens/feeds/widget/feeds_product.dart';
 import 'package:ecommerce/screens/wishlist/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class FeedsByCategoryScreen extends StatelessWidget {
@@ -33,7 +34,7 @@ class FeedsByCategoryScreen extends StatelessWidget {
               ),
               badgeContent: Text(
                 wlProvider.getAllFavoriteItems.length.toString(),
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   color: Colors.white,
                 ),
               ),
@@ -59,7 +60,7 @@ class FeedsByCategoryScreen extends StatelessWidget {
               ),
               badgeContent: Text(
                 cartProvider.getAllCartItem.length.toString(),
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   color: Colors.white,
                 ),
               ),

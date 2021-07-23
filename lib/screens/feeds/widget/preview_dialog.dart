@@ -4,6 +4,7 @@ import 'package:ecommerce/provider/wishlist_provider.dart';
 import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class PreviewDialog extends StatelessWidget {
@@ -179,7 +180,7 @@ class PreviewDialog extends StatelessWidget {
                       _texts[index],
                       maxLines: 1,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
                         //  fontSize: 15,
                         color: Colors.black,

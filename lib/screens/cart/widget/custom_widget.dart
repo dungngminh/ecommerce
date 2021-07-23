@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Widget checkoutSection(BuildContext context, double subTotal) {
   return Container(
@@ -19,7 +20,7 @@ Widget checkoutSection(BuildContext context, double subTotal) {
                   child: Text(
                     'Checkout',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -36,7 +37,7 @@ Widget checkoutSection(BuildContext context, double subTotal) {
               children: [
                 Text(
                   'Total: ',
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     color: Theme.of(context).textSelectionTheme.selectionColor,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -45,7 +46,7 @@ Widget checkoutSection(BuildContext context, double subTotal) {
                 Text(
                   '\$ ${subTotal.toStringAsFixed(3)}',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     color: Theme.of(context).textSelectionTheme.selectionColor,
                     fontSize: 20,
                     fontWeight: FontWeight.w400,

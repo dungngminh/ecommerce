@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp> {
                   children: [
                     Text(
                       'Error',
-                      style: GoogleFonts.openSans(
+                      style: GoogleFonts.poppins(
                         color: kPrimaryColor,
                         fontWeight: FontWeight.bold,
                       ),

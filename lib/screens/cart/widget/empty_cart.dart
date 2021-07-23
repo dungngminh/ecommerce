@@ -2,6 +2,7 @@ import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/screens/feeds/feeds.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class EmptyCart extends StatelessWidget {
@@ -32,7 +33,7 @@ class EmptyCart extends StatelessWidget {
           ),
           Text(
             'Your Cart Is Empty',
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               color: themeChange.darkTheme
                   ? Theme.of(context).textSelectionTheme.selectionColor
                   : Colors.black87,
@@ -52,7 +53,7 @@ class EmptyCart extends StatelessWidget {
               child: Text(
                 'Shop now'.toUpperCase(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
                 ),

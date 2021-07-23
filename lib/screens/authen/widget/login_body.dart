@@ -39,7 +39,7 @@ class _LoginBodyState extends State<LoginBody> {
         final snackBar = SnackBar(
           content: Text(
             result ?? 'Hello ' + _emailInput,
-            style: GoogleFonts.openSans(
+            style: GoogleFonts.poppins(
               color: kPrimaryColor,
               fontWeight: FontWeight.bold,
             ),
@@ -80,7 +80,7 @@ class _LoginBodyState extends State<LoginBody> {
           result ?? 'Error occured! Please try again',
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
-          style: GoogleFonts.openSans(
+          style: GoogleFonts.poppins(
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,
           ),
@@ -119,21 +119,21 @@ class _LoginBodyState extends State<LoginBody> {
           children: [
             Text(
               'Login'.toUpperCase(),
-              style: GoogleFonts.openSans(
+              style: GoogleFonts.poppins(
                 color: kPrimaryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
               ),
             ),
             SizedBox(
-              height: size.height * 0.03,
+              height: size.height * 0.02,
             ),
             SvgPicture.asset(
               'assets/icons/login.svg',
               height: size.height * 0.35,
             ),
             SizedBox(
-              height: size.height * 0.03,
+              height: size.height * 0.02,
             ),
             Form(
               key: _key,

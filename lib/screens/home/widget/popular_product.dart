@@ -5,6 +5,7 @@ import 'package:ecommerce/provider/wishlist_provider.dart';
 import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class PopularProduct extends StatefulWidget {
@@ -81,7 +82,7 @@ class _PopularProductState extends State<PopularProduct> {
                     ),
                     badgeContent: Text(
                       '\$ ${productAttribute.price}',
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         color: Colors.white,
                       ),
                     ),
@@ -101,7 +102,7 @@ class _PopularProductState extends State<PopularProduct> {
                   Text(
                     productAttribute.title,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
                       color: kblack,
@@ -120,7 +121,7 @@ class _PopularProductState extends State<PopularProduct> {
                           productAttribute.description,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Colors.grey.shade600,

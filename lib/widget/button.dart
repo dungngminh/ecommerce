@@ -33,7 +33,7 @@ class ButtonWidget extends StatelessWidget {
           child: isLoading == null
               ? Text(
                   text,
-                  style: GoogleFonts.openSans(
+                  style: GoogleFonts.poppins(
                     color: textColor,
                     fontWeight: FontWeight.bold,
                   ),
@@ -45,7 +45,7 @@ class ButtonWidget extends StatelessWidget {
                     )
                   : Text(
                       text,
-                      style: GoogleFonts.openSans(
+                      style: GoogleFonts.poppins(
                         color: textColor,
                         fontWeight: FontWeight.bold,
                       ),
