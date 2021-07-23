@@ -1,7 +1,10 @@
 import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/screens/cart/cart.dart';
+import 'package:ecommerce/screens/welcome/welcome.dart';
 import 'package:ecommerce/screens/wishlist/wishlist.dart';
+import 'package:ecommerce/services/firebase_authenticate.dart';
 import 'package:ecommerce/utils/constant.dart';
+import 'package:ecommerce/utils/helper_method.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +17,8 @@ class UserScreen extends StatefulWidget {
 class _UserScreenState extends State<UserScreen> {
   final ScrollController _scrollController = ScrollController();
   double top = 0.0;
+  final AuthFirebase _auth = AuthFirebase();
+  HelperMethod _helperMethod = HelperMethod();
 
   final List<IconData> _userListTileIcon = [
     Icons.favorite_rounded,
@@ -174,7 +179,16 @@ class _UserScreenState extends State<UserScreen> {
                         subtitle: 'Turn on/off dark mode',
                         isSwitchTitle: true,
                         provider: themeChange),
-                    userListTile('Log out', 7, subtitle: 'Log out'),
+                    userListTile('Sign Out', 7, subtitle: 'Log out',
+                        navigator: () {
+                      _helperMethod.showAlertDialog(
+                          title: 'Sign Out',
+                          callBackFunc: () {
+                            _auth.signOut().then((value) => Navigator.pushNamed(
+                                context, WelcomeScreen.routeName));
+                          },
+                          context: context);
+                    }),
                   ],
                 ),
               ),

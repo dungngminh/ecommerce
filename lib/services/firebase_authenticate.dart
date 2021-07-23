@@ -1,41 +1,70 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthFirebase {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  signUpWithEmailAndPassword(String email, String password) async {
+  Future<String?> signUpWithEmailAndPassword(
+      String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email.toLowerCase().trim(), password: password.trim());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-        return 2;
+        return 'The password provided is too weak.';
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-        return 1;
+        return 'The account already exists for that email.';
       }
     } catch (e) {
       print(e);
     }
-    return 0;
+    return null;
   }
 
-  signInWithEmailAndPassword(String email, String password) async {
+  Future<String?> signInWithEmailAndPassword(
+      String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(
           email: email.toLowerCase().trim(), password: password.trim());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-        return 2;
+        return 'Wrong password provided for that user.';
       } else if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-        return 1;
+        return 'No user found for that email.';
       }
     } catch (e) {
       print(e);
     }
-    return 0;
+    return null;
+  }
+
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<String?> signInWithGoogle() async {
+    final googleSignIn = GoogleSignIn();
+    final googleAccount = await googleSignIn.signIn();
+    if (googleAccount != null) {
+      final googleAuth = await googleAccount.authentication;
+      if (googleAuth.accessToken != null && googleAuth.idToken != null) {
+        try {
+          final result = await _auth.signInWithCredential(
+            GoogleAuthProvider.credential(
+                accessToken: googleAuth.accessToken,
+                idToken: googleAuth.idToken),
+          );
+          print(result);
+          return 'Logged in with ${result.additionalUserInfo!.profile!['email']}';
+        } catch (error) {
+          return null;
+        }
+      }
+    } else
+      return null;
   }
 }

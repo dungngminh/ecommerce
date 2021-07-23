@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomDividerWidget extends StatelessWidget {
+  final String title;
   const CustomDividerWidget({
-    Key? key,
+    Key? key, required this.title,
   }) : super(key: key);
 
   @override
@@ -20,7 +21,7 @@ class CustomDividerWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
-              'OR',
+              title.toUpperCase(),
               style: GoogleFonts.openSans(
                 color: kPrimaryColor,
                 fontWeight: FontWeight.w600,

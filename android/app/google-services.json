@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "98990174665-g44lffufv1et050991721t8q6mkr1tm4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.komkat.ecommerce",
+            "certificate_hash": "2380a40066e3a939b69a2ca0242c7735ab7c71d4"
+          }
+        },
+        {
           "client_id": "98990174665-e4gj7q3bm4ausj9al6ejj9icpsgbkili.apps.googleusercontent.com",
           "client_type": 3
         }

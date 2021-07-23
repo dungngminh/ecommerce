@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 class PasswordField extends StatefulWidget {
   final bool isSignUp;
-  final int? validatorType;
   final bool isRepeat;
   final ValueChanged<String> onChanged;
   final String? password;
@@ -20,7 +19,6 @@ class PasswordField extends StatefulWidget {
     this.password,
     this.nextAction,
     required this.isSignUp,
-    this.validatorType = 3,
   }) : super(key: key);
 
   @override
@@ -40,20 +38,11 @@ class _PasswordFieldState extends State<PasswordField> {
             textInputAction: widget.nextAction,
             obscureText: _isHidePass,
             validator: (value) {
-              if (widget.validatorType == 3)
-                return widget.password == null
-                    ? (value!.length < 8
-                        ? 'Password must >=8 characters'
-                        : null)
-                    : (widget.password != value
-                        ? 'The password confirmation does not match'
-                        : null);
-              else if (widget.validatorType == 2)
-                return !widget.isSignUp
-                    ? 'Wrong password provided for that user.'
-                    : 'The password provided is too weak.';
-              else
-                return null;
+              return widget.password == null
+                  ? (value!.length < 8 ? 'Password must >=8 characters' : null)
+                  : (widget.password != value
+                      ? 'The password confirmation does not match'
+                      : null);
             },
             onChanged: widget.onChanged,
             onEditingComplete: widget.onCompleted,

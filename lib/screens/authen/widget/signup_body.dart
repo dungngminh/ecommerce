@@ -9,6 +9,7 @@ import 'package:ecommerce/screens/authen/widget/signup_background.dart';
 import 'package:ecommerce/screens/authen/widget/social_linking.dart';
 import 'package:ecommerce/services/firebase_authenticate.dart';
 import 'package:ecommerce/utils/constant.dart';
+import 'package:ecommerce/widget/bottombar.dart';
 import 'package:ecommerce/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,12 +22,91 @@ class SignUpBody extends StatefulWidget {
 
 class _SignUpBodyState extends State<SignUpBody> {
   String _emailInput = '';
-  String _passwordInput = '';
+  String _passInput = '';
   File? _pickedImage;
-  int validatorType = 0;
+  bool _isLoading = false;
 
   final _key = GlobalKey<FormState>();
   final AuthFirebase _auth = AuthFirebase();
+
+  _submit() async {
+    FocusScope.of(context).unfocus();
+    if (_key.currentState!.validate()) {
+      setState(() {
+        _isLoading = !_isLoading;
+      });
+      try {
+        final result =
+            await _auth.signUpWithEmailAndPassword(_emailInput, _passInput);
+        print(result);
+        final snackBar = SnackBar(
+          content: Text(
+            result ?? 'Successful',
+            style: GoogleFonts.openSans(
+              color: kPrimaryColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          backgroundColor: Colors.white,
+        );
+        if (result != null) {
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Future.delayed(
+            new Duration(milliseconds: 500),
+            () {
+              Navigator.pushNamed(context, LoginScreen.routeName);
+            },
+          );
+        }
+      } finally {
+        setState(() {
+          _isLoading = !_isLoading;
+        });
+      }
+    }
+  }
+
+  _loginWithGoogle() async {
+    try {
+      setState(() {
+        _isLoading = !_isLoading;
+      });
+      final result = await _auth.signInWithGoogle();
+      print(result);
+      final snackBar = SnackBar(
+        content: Text(
+          result ?? 'Error occured! Please try again',
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+          style: GoogleFonts.openSans(
+            color: kPrimaryColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.white,
+      );
+      if (result == null) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        Future.delayed(Duration(milliseconds: 300), () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BottomBarScreen(),
+            ),
+          );
+        });
+      }
+    } finally {
+      setState(() {
+        _isLoading = !_isLoading;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +179,6 @@ class _SignUpBodyState extends State<SignUpBody> {
                 children: [
                   EmailField(
                     isSignUp: true,
-                    validatorType: validatorType,
                     hintText: 'Your Email',
                     icon: Icons.person,
                     onChanged: (String value) {
@@ -113,21 +192,25 @@ class _SignUpBodyState extends State<SignUpBody> {
                     nextAction: TextInputAction.next,
                     onChanged: (String value) {
                       setState(() {
-                        _passwordInput = value;
+                        _passInput = value;
                       });
                     },
                   ),
                   PasswordField(
                     isSignUp: true,
-                    onCompleted: _submit,
-                    password: _passwordInput,
+                    onCompleted: null,
+                    password: _passInput,
                     isRepeat: true,
                     onChanged: (String value) {},
                   ),
                 ],
               ),
             ),
-            ButtonWidget(text: 'SIGN IN', onPressed: _submit),
+            ButtonWidget(
+              text: 'SIGN IN',
+              onPressed: _submit,
+              isLoading: _isLoading,
+            ),
             SizedBox(
               height: size.height * 0.015,
             ),
@@ -138,35 +221,26 @@ class _SignUpBodyState extends State<SignUpBody> {
               ),
               type: false,
             ),
-            CustomDividerWidget(),
+            CustomDividerWidget(
+              title: 'OR',
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SocialLinkingAccount(
                   assetName: 'assets/icons/google.svg',
-                  onPressed: () {},
+                  onPressed: _loginWithGoogle,
                 ),
                 SocialLinkingAccount(
                   assetName: 'assets/icons/facebook.svg',
                   onPressed: () {},
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
-  }
-
-  void _submit() {
-    FocusScope.of(context).unfocus();
-    if (_key.currentState!.validate()) {
-      _key.currentState!.save();
-      _auth
-          .signUpWithEmailAndPassword(_emailInput, _passwordInput)
-          .then((value) => validatorType = value);
-    } else
-      print('fail');
   }
 
   void _optionImage(BuildContext context) async {

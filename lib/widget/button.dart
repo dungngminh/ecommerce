@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
+  final bool? isLoading;
   final Function() onPressed;
   final Color color, textColor;
   const ButtonWidget({
@@ -11,6 +12,7 @@ class ButtonWidget extends StatelessWidget {
     required this.onPressed,
     this.color = kPrimaryColor,
     this.textColor = Colors.white,
+    this.isLoading,
   });
 
   @override
@@ -28,13 +30,26 @@ class ButtonWidget extends StatelessWidget {
             backgroundColor: color,
           ),
           onPressed: onPressed,
-          child: Text(
-            text,
-            style: GoogleFonts.openSans(
-              color: textColor,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          child: isLoading == null
+              ? Text(
+                  text,
+                  style: GoogleFonts.openSans(
+                    color: textColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              : (isLoading!
+                  ? CircularProgressIndicator(
+                      color: textColor,
+                      strokeWidth: 1.0,
+                    )
+                  : Text(
+                      text,
+                      style: GoogleFonts.openSans(
+                        color: textColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
         ),
       ),
     );

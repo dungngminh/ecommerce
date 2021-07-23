@@ -27,7 +27,7 @@ Color darkGrey = Color.fromRGBO(18, 18, 18, 1);
 ThemeData themeData(bool isDarkMode, BuildContext context) {
   return ThemeData(
     scaffoldBackgroundColor: isDarkMode ? darkGrey : Colors.grey[100],
-    primaryColor: isDarkMode ? 'bb86fc'.toColor() : '6200ee'.toColor(),
+    primaryColor: isDarkMode ? kPrimaryColor : '6200ee'.toColor(),
     accentColor: isDarkMode ? darkGrey : '6200ee'.toColor(),
     backgroundColor: isDarkMode ? darkGrey : Colors.grey[100],
     indicatorColor: isDarkMode ? Color(0XFF0E1D36) : Color(0XFFF1F5F8),
@@ -49,13 +49,13 @@ ThemeData themeData(bool isDarkMode, BuildContext context) {
       //can use headline6 to config title app bar
       backwardsCompatibility: false,
       elevation: 0,
-      backgroundColor: isDarkMode ? 'bb86fc'.toColor() : '6200ee'.toColor(),
+      backgroundColor: isDarkMode ? kPrimaryColor : '6200ee'.toColor(),
       titleTextStyle: TextStyle(
           color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       unselectedItemColor: isDarkMode ? Colors.white : Colors.grey,
-      selectedItemColor: isDarkMode ? 'bb86fc'.toColor() : '6200ee'.toColor(),
+      selectedItemColor: isDarkMode ? kPrimaryColor : '6200ee'.toColor(),
     ),
   );
 }

@@ -6,12 +6,14 @@ import 'package:ecommerce/screens/authen/signup_screen.dart';
 import 'package:ecommerce/screens/cart/cart.dart';
 import 'package:ecommerce/screens/feeds/feeds.dart';
 import 'package:ecommerce/screens/feeds/feedsByCate.dart';
+import 'package:ecommerce/screens/init.dart';
 import 'package:ecommerce/screens/inner_screen/brand_navigator_rail.dart';
 import 'package:ecommerce/screens/inner_screen/product_detail.dart';
 import 'package:ecommerce/screens/authen/login_screen.dart';
 import 'package:ecommerce/screens/user/user.dart';
 import 'package:ecommerce/screens/welcome/welcome.dart';
 import 'package:ecommerce/screens/wishlist/wishlist.dart';
+import 'package:ecommerce/services/firebase_authenticate.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/widget/bottombar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -102,8 +104,9 @@ class _MyAppState extends State<MyApp> {
                   title: "Ecommerce",
                   theme: themeData(theme.darkTheme, context),
                   debugShowCheckedModeBanner: false,
-                  initialRoute: WelcomeScreen.routeName,
+                  initialRoute: InitState.routeName,
                   routes: {
+                    InitState.routeName: (context) => InitState(),
                     WelcomeScreen.routeName: (context) => WelcomeScreen(),
                     LoginScreen.routeName: (context) => LoginScreen(),
                     SignUpScreen.routeName: (context) => SignUpScreen(),
