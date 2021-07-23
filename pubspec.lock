@@ -64,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
+  cross_file:
+    dependency: transitive
+    description:
+      name: cross_file
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.1+4"
   crypto:
     dependency: transitive
     description:
@@ -99,6 +106,48 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+  firebase_auth:
+    dependency: "direct main"
+    description:
+      name: firebase_auth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
+  firebase_auth_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_auth_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.0.0"
+  firebase_auth_web:
+    dependency: transitive
+    description:
+      name: firebase_auth_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
+  firebase_core:
+    dependency: "direct main"
+    description:
+      name: firebase_core
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.4.0"
+  firebase_core_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_core_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.1"
+  firebase_core_web:
+    dependency: transitive
+    description:
+      name: firebase_core_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -111,6 +160,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.0"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -163,6 +219,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.2"
+  image_picker_for_web:
+    dependency: transitive
+    description:
+      name: image_picker_for_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.1"
+  image_picker_platform_interface:
+    dependency: transitive
+    description:
+      name: image_picker_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.0"
   intl:
     dependency: "direct main"
     description:
@@ -422,4 +499,4 @@ packages:
     version: "5.1.2"
 sdks:
   dart: ">=2.13.0 <3.0.0"
-  flutter: ">=1.24.0-7.0"
+  flutter: ">=2.0.0"

@@ -14,10 +14,14 @@ import 'package:ecommerce/screens/welcome/welcome.dart';
 import 'package:ecommerce/screens/wishlist/wishlist.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/widget/bottombar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -27,7 +31,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  DarkThemeProvider themeProvider = DarkThemeProvider();
+  DarkThemeProvider _themeProvider = DarkThemeProvider();
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override
   void initState() {
@@ -36,50 +41,86 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future getCurrentAppTheme() async {
-    themeProvider.darkTheme = await themeProvider.setting.getTheme();
+    _themeProvider.darkTheme = await _themeProvider.setting.getTheme();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => themeProvider,
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ProductProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => CartProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => WishListProvider(),
-        ),
-      ],
-      child: Consumer<DarkThemeProvider>(
-        builder: (context, theme, child) {
-          return MaterialApp(
-            title: "Ecommerce",
-            theme: themeData(theme.darkTheme, context),
-            debugShowCheckedModeBanner: false,
-            initialRoute: WelcomeScreen.routeName,
-            routes: {
-              WelcomeScreen.routeName: (context) => WelcomeScreen(),
-              LoginScreen.routeName: (context) => LoginScreen(),
-              SignUpScreen.routeName:(context) => SignUpScreen(),
-              BrandNavigationRailScreen.routeName: (context) =>
-                  BrandNavigationRailScreen(),
-              FeedsScreen.routeName: (context) => FeedsScreen(),
-              WishList.routeName: (context) => WishList(),
-              CartScreen.routeName: (context) => CartScreen(),
-              UserScreen.routeName: (context) => UserScreen(),
-              ProductDetail.routeName: (context) => ProductDetail(),
-              FeedsByCategoryScreen.routeName: (context) =>
-                  FeedsByCategoryScreen(),
-            },
+    return FutureBuilder<Object>(
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return MaterialApp(
+              home: Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(
+                    color: kPrimaryColor,
+                  ),
+                ),
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return MaterialApp(
+              home: Scaffold(
+                body: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Error',
+                      style: GoogleFonts.openSans(
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Icon(
+                      Icons.error,
+                      color: kPrimaryColor,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                create: (_) => _themeProvider,
+              ),
+              ChangeNotifierProvider(
+                create: (_) => ProductProvider(),
+              ),
+              ChangeNotifierProvider(
+                create: (_) => CartProvider(),
+              ),
+              ChangeNotifierProvider(
+                create: (_) => WishListProvider(),
+              ),
+            ],
+            child: Consumer<DarkThemeProvider>(
+              builder: (context, theme, child) {
+                return MaterialApp(
+                  title: "Ecommerce",
+                  theme: themeData(theme.darkTheme, context),
+                  debugShowCheckedModeBanner: false,
+                  initialRoute: WelcomeScreen.routeName,
+                  routes: {
+                    WelcomeScreen.routeName: (context) => WelcomeScreen(),
+                    LoginScreen.routeName: (context) => LoginScreen(),
+                    SignUpScreen.routeName: (context) => SignUpScreen(),
+                    BrandNavigationRailScreen.routeName: (context) =>
+                        BrandNavigationRailScreen(),
+                    FeedsScreen.routeName: (context) => FeedsScreen(),
+                    WishList.routeName: (context) => WishList(),
+                    CartScreen.routeName: (context) => CartScreen(),
+                    UserScreen.routeName: (context) => UserScreen(),
+                    ProductDetail.routeName: (context) => ProductDetail(),
+                    FeedsByCategoryScreen.routeName: (context) =>
+                        FeedsByCategoryScreen(),
+                  },
+                );
+              },
+            ),
           );
-        },
-      ),
-    );
+        });
   }
 }

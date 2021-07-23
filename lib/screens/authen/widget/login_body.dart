@@ -3,6 +3,7 @@ import 'package:ecommerce/screens/authen/widget/email_field.dart';
 import 'package:ecommerce/screens/authen/widget/check_account_status.dart';
 import 'package:ecommerce/screens/authen/widget/login_background.dart';
 import 'package:ecommerce/screens/authen/widget/password_field.dart';
+import 'package:ecommerce/services/firebase_authenticate.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/widget/button.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +17,28 @@ class LoginBody extends StatefulWidget {
 
 class _LoginBodyState extends State<LoginBody> {
   final _key = GlobalKey<FormState>();
+  String _emailInput = '';
+  String _passInput = '';
+  int? validatorType;
 
-  void _submit() {
+  //authen
+  final AuthFirebase _auth = AuthFirebase();
+
+  _submit() async {
+    print(_emailInput);
+    print(_passInput);
     FocusScope.of(context).unfocus();
+    var result =
+        await _auth.signInWithEmailAndPassword(_emailInput, _passInput);
+    setState(() {
+      validatorType = result;
+    });
+    print(validatorType);
+    await _validate();
+  }
+
+  _validate() async {
     if (_key.currentState!.validate()) {
-      print(true);
       _key.currentState!.save();
     } else
       print('fail');
@@ -57,13 +75,24 @@ class _LoginBodyState extends State<LoginBody> {
               child: Column(
                 children: [
                   EmailField(
+                    isSignUp: false,
+                    validatorType: validatorType,
                     hintText: 'Your Email',
                     icon: Icons.person,
-                    onChanged: (String value) {},
+                    onChanged: (String value) {
+                      setState(() {
+                        _emailInput = value;
+                      });
+                    },
                   ),
                   PasswordField(
-                    onCompleted: _submit,
-                    onChanged: (String value) {},
+                    isSignUp: false,
+                    validatorType: validatorType,
+                    onChanged: (String value) {
+                      setState(() {
+                        _passInput = value;
+                      });
+                    },
                   ),
                 ],
               ),

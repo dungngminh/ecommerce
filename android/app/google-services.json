@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "98990174665",
+    "project_id": "shopapp-f5765",
+    "storage_bucket": "shopapp-f5765.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98990174665:android:3384f50d6a7bb1fcc0b818",
+        "android_client_info": {
+          "package_name": "com.komkat.ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98990174665-e4gj7q3bm4ausj9al6ejj9icpsgbkili.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcaldcWn7e3WO6iA7Gi5Kup_TM9uvpw7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98990174665-e4gj7q3bm4ausj9al6ejj9icpsgbkili.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
