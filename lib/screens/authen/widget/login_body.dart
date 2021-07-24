@@ -1,3 +1,4 @@
+import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/screens/authen/signup_screen.dart';
 import 'package:ecommerce/screens/authen/widget/custom_divider.dart';
 import 'package:ecommerce/screens/authen/widget/email_field.dart';
@@ -12,6 +13,7 @@ import 'package:ecommerce/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class LoginBody extends StatefulWidget {
   @override
@@ -44,7 +46,8 @@ class _LoginBodyState extends State<LoginBody> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          behavior: SnackBarBehavior.fixed,
+        behavior: SnackBarBehavior.floating,
+
           backgroundColor: Colors.white,
         );
         if (result != null) {
@@ -111,7 +114,7 @@ class _LoginBodyState extends State<LoginBody> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    final themeProvider = Provider.of<DarkThemeProvider>(context);
     return LoginBackground(
       child: SingleChildScrollView(
         child: Column(
@@ -120,7 +123,9 @@ class _LoginBodyState extends State<LoginBody> {
             Text(
               'Login'.toUpperCase(),
               style: GoogleFonts.poppins(
-                color: kPrimaryColor,
+                color: themeProvider.darkTheme
+                    ? kPrimaryLightColor
+                    : kPrimaryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
               ),
@@ -140,6 +145,7 @@ class _LoginBodyState extends State<LoginBody> {
               child: Column(
                 children: [
                   EmailField(
+                    darkMode: themeProvider.darkTheme,
                     isSignUp: false,
                     hintText: 'Your Email',
                     icon: Icons.person,
@@ -150,6 +156,7 @@ class _LoginBodyState extends State<LoginBody> {
                     },
                   ),
                   PasswordField(
+                    darkMode: themeProvider.darkTheme,
                     isSignUp: false,
                     onChanged: (String value) {
                       setState(() {
@@ -169,10 +176,12 @@ class _LoginBodyState extends State<LoginBody> {
               height: size.height * 0.015,
             ),
             CheckHavingAccountStatus(
+              darkMode: themeProvider.darkTheme,
               function: () =>
                   Navigator.pushNamed(context, SignUpScreen.routeName),
             ),
             CustomDividerWidget(
+              darkMode: themeProvider.darkTheme,
               title: 'OR',
             ),
             Row(

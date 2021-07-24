@@ -39,9 +39,13 @@ class ButtonWidget extends StatelessWidget {
                   ),
                 )
               : (isLoading!
-                  ? CircularProgressIndicator(
-                      color: textColor,
-                      strokeWidth: 1.0,
+                  ? Container(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        color: textColor,
+                        strokeWidth: 2.0,
+                      ),
                     )
                   : Text(
                       text,

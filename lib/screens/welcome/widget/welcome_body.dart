@@ -39,13 +39,14 @@ class WelcomeBody extends StatelessWidget {
               text: 'LOG IN',
               onPressed: () =>
                   Navigator.pushNamed(context, LoginScreen.routeName),
+              textColor: kPrimaryLightColor,
             ),
             ButtonWidget(
               text: 'SIGN UP',
               onPressed: () =>
                   Navigator.pushNamed(context, SignUpScreen.routeName),
               color: kPrimaryLightColor,
-              textColor: Colors.black,
+              textColor: kPrimaryColor,
             ),
           ],
         ),

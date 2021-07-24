@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EmailField extends StatelessWidget {
+  final bool darkMode;
   final bool isSignUp;
   final String hintText;
   final IconData icon;
@@ -14,7 +15,8 @@ class EmailField extends StatelessWidget {
       required this.hintText,
       required this.icon,
       required this.onChanged,
-      required this.isSignUp})
+      required this.isSignUp,
+      required this.darkMode})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,9 @@ class EmailField extends StatelessWidget {
             color: kPrimaryColor,
           ),
           hintText: hintText,
-          hintStyle: GoogleFonts.poppins(),
+          hintStyle: GoogleFonts.poppins(
+            color: kPrimaryColor,
+          ),
           border: InputBorder.none,
         ),
       ),

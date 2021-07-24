@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PasswordField extends StatefulWidget {
+  final bool darkMode;
   final bool isSignUp;
   final bool isRepeat;
   final ValueChanged<String> onChanged;
@@ -19,6 +20,7 @@ class PasswordField extends StatefulWidget {
     this.password,
     this.nextAction,
     required this.isSignUp,
+    required this.darkMode,
   }) : super(key: key);
 
   @override
@@ -49,7 +51,9 @@ class _PasswordFieldState extends State<PasswordField> {
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: widget.isRepeat ? 'Repeat Password ' : 'Password',
-              hintStyle: GoogleFonts.poppins(),
+              hintStyle: GoogleFonts.poppins(
+                color: kPrimaryColor ,
+              ),
               icon: Icon(
                 Icons.lock,
                 color: kPrimaryColor,

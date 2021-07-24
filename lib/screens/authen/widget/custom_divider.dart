@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomDividerWidget extends StatelessWidget {
+  final bool darkMode;
   final String title;
   const CustomDividerWidget({
     Key? key,
-    required this.title,
+    required this.title, required this.darkMode,
   }) : super(key: key);
 
   @override
@@ -24,7 +25,7 @@ class CustomDividerWidget extends StatelessWidget {
             child: Text(
               title.toUpperCase(),
               style: GoogleFonts.poppins(
-                color: kPrimaryColor,
+                color: darkMode?kPrimaryLightColor:kPrimaryColor,
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
               ),

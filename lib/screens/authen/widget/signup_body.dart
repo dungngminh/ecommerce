@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/screens/authen/login_screen.dart';
 import 'package:ecommerce/screens/authen/widget/check_account_status.dart';
 import 'package:ecommerce/screens/authen/widget/custom_divider.dart';
@@ -8,12 +10,14 @@ import 'package:ecommerce/screens/authen/widget/password_field.dart';
 import 'package:ecommerce/screens/authen/widget/signup_background.dart';
 import 'package:ecommerce/screens/authen/widget/social_linking.dart';
 import 'package:ecommerce/services/firebase_authenticate.dart';
+import 'package:ecommerce/services/firebase_firestore.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/widget/bottombar.dart';
 import 'package:ecommerce/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class SignUpBody extends StatefulWidget {
   @override
@@ -28,8 +32,12 @@ class _SignUpBodyState extends State<SignUpBody> {
 
   final _key = GlobalKey<FormState>();
   final AuthFirebase _auth = AuthFirebase();
+  final FireDatabase _db = FireDatabase();
 
   _submit() async {
+    var date = DateTime.now().toString();
+    var dateParse = DateTime.parse(date);
+    var formatDate = '${dateParse.day}-${dateParse.month}-${dateParse.year}';
     FocusScope.of(context).unfocus();
     if (_key.currentState!.validate()) {
       setState(() {
@@ -38,7 +46,8 @@ class _SignUpBodyState extends State<SignUpBody> {
       try {
         final result =
             await _auth.signUpWithEmailAndPassword(_emailInput, _passInput);
-        print(result);
+
+        print(result ?? 'ok');
         final snackBar = SnackBar(
           content: Text(
             result ?? 'Successful',
@@ -47,14 +56,24 @@ class _SignUpBodyState extends State<SignUpBody> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.white,
         );
         if (result != null) {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         } else {
+          final _uid = _auth.instance.currentUser!.uid;
+          print(_uid);
+          _db.addUser(
+            uid: _uid,
+            email: _emailInput,
+            imageUrl: '',
+            joinedDate: formatDate,
+            createAt: DateTime.now(),
+          );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
           Future.delayed(
-            new Duration(milliseconds: 500),
+            Duration(milliseconds: 500),
             () {
               Navigator.pushNamed(context, LoginScreen.routeName);
             },
@@ -110,6 +129,7 @@ class _SignUpBodyState extends State<SignUpBody> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<DarkThemeProvider>(context);
     final size = MediaQuery.of(context).size;
     print(size);
     return SignUpBackground(
@@ -120,7 +140,9 @@ class _SignUpBodyState extends State<SignUpBody> {
             Text(
               'signup'.toUpperCase(),
               style: GoogleFonts.poppins(
-                color: kPrimaryColor,
+                color: themeProvider.darkTheme
+                    ? kPrimaryLightColor
+                    : kPrimaryColor,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -137,10 +159,14 @@ class _SignUpBodyState extends State<SignUpBody> {
                   ),
                   child: CircleAvatar(
                     radius: 70,
-                    backgroundColor: kPrimaryColor,
+                    backgroundColor: themeProvider.darkTheme
+                        ? kPrimaryLightColor
+                        : kPrimaryColor,
                     child: CircleAvatar(
                       radius: 65,
-                      backgroundColor: kPrimaryLightColor,
+                      backgroundColor: themeProvider.darkTheme
+                          ? kPrimaryColor
+                          : kPrimaryLightColor,
                       backgroundImage: _pickedImage == null
                           ? null
                           : FileImage(_pickedImage!),
@@ -154,7 +180,9 @@ class _SignUpBodyState extends State<SignUpBody> {
                     width: 55,
                     height: 55,
                     decoration: BoxDecoration(
-                      color: kPrimaryColor,
+                      color: themeProvider.darkTheme
+                          ? kPrimaryLightColor
+                          : kPrimaryColor,
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(
@@ -162,7 +190,9 @@ class _SignUpBodyState extends State<SignUpBody> {
                       icon: Icon(
                         Icons.add_a_photo,
                         size: 30,
-                        color: kPrimaryLightColor,
+                        color: themeProvider.darkTheme
+                            ? kPrimaryColor
+                            : kPrimaryLightColor,
                       ),
                       onPressed: () => _optionImage(context),
                     ),
@@ -178,6 +208,7 @@ class _SignUpBodyState extends State<SignUpBody> {
               child: Column(
                 children: [
                   EmailField(
+                    darkMode: themeProvider.darkTheme,
                     isSignUp: true,
                     hintText: 'Your Email',
                     icon: Icons.person,
@@ -188,6 +219,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                     },
                   ),
                   PasswordField(
+                    darkMode: themeProvider.darkTheme,
                     isSignUp: true,
                     nextAction: TextInputAction.next,
                     onChanged: (String value) {
@@ -197,6 +229,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                     },
                   ),
                   PasswordField(
+                    darkMode: themeProvider.darkTheme,
                     isSignUp: true,
                     onCompleted: null,
                     password: _passInput,
@@ -215,6 +248,7 @@ class _SignUpBodyState extends State<SignUpBody> {
               height: size.height * 0.015,
             ),
             CheckHavingAccountStatus(
+              darkMode: themeProvider.darkTheme,
               function: () => Navigator.pushNamed(
                 context,
                 LoginScreen.routeName,
@@ -222,6 +256,7 @@ class _SignUpBodyState extends State<SignUpBody> {
               type: false,
             ),
             CustomDividerWidget(
+              darkMode: themeProvider.darkTheme,
               title: 'OR',
             ),
             Row(
