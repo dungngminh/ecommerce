@@ -10,6 +10,7 @@ import 'package:ecommerce/screens/authen/widget/password_field.dart';
 import 'package:ecommerce/screens/authen/widget/signup_background.dart';
 import 'package:ecommerce/screens/authen/widget/social_linking.dart';
 import 'package:ecommerce/services/firebase_authenticate.dart';
+import 'package:ecommerce/services/firebase_dbStorage.dart';
 import 'package:ecommerce/services/firebase_firestore.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/widget/bottombar.dart';
@@ -33,8 +34,9 @@ class _SignUpBodyState extends State<SignUpBody> {
   final _key = GlobalKey<FormState>();
   final AuthFirebase _auth = AuthFirebase();
   final FireDatabase _db = FireDatabase();
+  final StorageFirebase _storage = StorageFirebase();
 
-  _submit() async {
+  _signUp() async {
     var date = DateTime.now().toString();
     var dateParse = DateTime.parse(date);
     var formatDate = '${dateParse.day}-${dateParse.month}-${dateParse.year}';
@@ -46,8 +48,7 @@ class _SignUpBodyState extends State<SignUpBody> {
       try {
         final result =
             await _auth.signUpWithEmailAndPassword(_emailInput, _passInput);
-
-        print(result ?? 'ok');
+        print(result ?? 'signup oke');
         final snackBar = SnackBar(
           content: Text(
             result ?? 'Successful',
@@ -62,15 +63,20 @@ class _SignUpBodyState extends State<SignUpBody> {
         if (result != null) {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         } else {
+          final imageUrl = await _storage.saveImageToStorage(
+              folder: 'userImage', name: _emailInput, file: _pickedImage);
+          print(imageUrl);
           final _uid = _auth.instance.currentUser!.uid;
           print(_uid);
-          _db.addUser(
-            uid: _uid,
-            email: _emailInput,
-            imageUrl: '',
-            joinedDate: formatDate,
-            createAt: DateTime.now(),
-          );
+          _db
+              .addUser(
+                uid: _uid,
+                email: _emailInput,
+                imageUrl: imageUrl,
+                joinedDate: formatDate,
+                createAt: DateTime.now(),
+              )
+              .then((value) => print(value ? 'add ok' : 'add fail'));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
           Future.delayed(
             Duration(milliseconds: 500),
@@ -88,15 +94,22 @@ class _SignUpBodyState extends State<SignUpBody> {
   }
 
   _loginWithGoogle() async {
+    var date = DateTime.now().toString();
+    var dateParse = DateTime.parse(date);
+    var formatDate = '${dateParse.day}-${dateParse.month}-${dateParse.year}';
     try {
       setState(() {
         _isLoading = !_isLoading;
       });
-      final result = await _auth.signInWithGoogle();
-      print(result);
+      final resultUser = await _auth.signInWithGoogle();
+
+      print('login to ${resultUser!.user!.email}');
+
       final snackBar = SnackBar(
         content: Text(
-          result ?? 'Error occured! Please try again',
+          resultUser.user!.email != null
+              ? 'Logged in with ${resultUser.user!.email}'
+              : 'Error occured! Please try again',
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
           style: GoogleFonts.poppins(
@@ -107,9 +120,29 @@ class _SignUpBodyState extends State<SignUpBody> {
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.white,
       );
-      if (result == null) {
+      if (resultUser.user!.email == null) {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else {
+        final _uid = _auth.instance.currentUser!.uid;
+        final isExist = await _db.isExistInFirestore(_uid);
+        print(isExist ? 'ton tai' : 'ko');
+        print(_uid);
+        if (!isExist) {
+          await _db
+              .addUser(
+                uid: _uid,
+                email: resultUser.user!.email!,
+                name: resultUser.user!.displayName,
+                imageUrl: resultUser.user!.photoURL,
+                phoneNumber: resultUser.user!.phoneNumber,
+                joinedDate: formatDate,
+                createAt: DateTime.now(),
+              )
+              .then(
+                (value) => print(
+                    value ? 'add google ok' : 'add google false or existed'),
+              );
+        }
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Future.delayed(Duration(milliseconds: 300), () {
           Navigator.push(
@@ -240,8 +273,8 @@ class _SignUpBodyState extends State<SignUpBody> {
               ),
             ),
             ButtonWidget(
-              text: 'SIGN IN',
-              onPressed: _submit,
+              text: 'SIGN UP',
+              onPressed: _signUp,
               isLoading: _isLoading,
             ),
             SizedBox(
@@ -343,7 +376,8 @@ class _SignUpBodyState extends State<SignUpBody> {
 
   void _imageFromCamera() async {
     final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+    final pickedImage =
+        await picker.pickImage(source: ImageSource.camera, imageQuality: 10);
     if (pickedImage != null) {
       final pickedImageFile = File(pickedImage.path);
       setState(() {
@@ -355,7 +389,8 @@ class _SignUpBodyState extends State<SignUpBody> {
 
   void _imageFromGallery() async {
     final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 10);
     if (pickedImage != null) {
       final pickedImageFile = File(pickedImage.path);
       setState(() {

@@ -7,6 +7,7 @@ import 'package:ecommerce/screens/authen/widget/login_background.dart';
 import 'package:ecommerce/screens/authen/widget/password_field.dart';
 import 'package:ecommerce/screens/authen/widget/social_linking.dart';
 import 'package:ecommerce/services/firebase_authenticate.dart';
+import 'package:ecommerce/services/firebase_firestore.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/widget/bottombar.dart';
 import 'package:ecommerce/widget/button.dart';
@@ -27,6 +28,7 @@ class _LoginBodyState extends State<LoginBody> {
   bool _isLoading = false;
   //authen
   final _auth = AuthFirebase();
+  final _db = FireDatabase();
 
   _submit() async {
     FocusScope.of(context).unfocus();
@@ -46,8 +48,7 @@ class _LoginBodyState extends State<LoginBody> {
               fontWeight: FontWeight.bold,
             ),
           ),
-        behavior: SnackBarBehavior.floating,
-
+          behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.white,
         );
         if (result != null) {
@@ -72,15 +73,22 @@ class _LoginBodyState extends State<LoginBody> {
   }
 
   _loginWithGoogle() async {
+    var date = DateTime.now().toString();
+    var dateParse = DateTime.parse(date);
+    var formatDate = '${dateParse.day}-${dateParse.month}-${dateParse.year}';
     try {
       setState(() {
         _isLoading = !_isLoading;
       });
-      final result = await _auth.signInWithGoogle();
-      print(result);
+      final resultUser = await _auth.signInWithGoogle();
+
+      print('login to ${resultUser!.user!.email}');
+
       final snackBar = SnackBar(
         content: Text(
-          result ?? 'Error occured! Please try again',
+          resultUser.user!.email != null
+              ? 'Logged in with ${resultUser.user!.email}'
+              : 'Error occured! Please try again',
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
           style: GoogleFonts.poppins(
@@ -91,9 +99,29 @@ class _LoginBodyState extends State<LoginBody> {
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.white,
       );
-      if (result == null) {
+      if (resultUser.user!.email == null) {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else {
+        final _uid = _auth.instance.currentUser!.uid;
+        final isExist = await _db.isExistInFirestore(_uid);
+        print(isExist ? 'ton tai' : 'ko');
+        print(_uid);
+        if (!isExist) {
+          await _db
+              .addUser(
+                uid: _uid,
+                email: resultUser.user!.email!,
+                name: resultUser.user!.displayName,
+                imageUrl: resultUser.user!.photoURL,
+                phoneNumber: resultUser.user!.phoneNumber,
+                joinedDate: formatDate,
+                createAt: DateTime.now(),
+              )
+              .then(
+                (value) => print(
+                    value ? 'add google ok' : 'add google false or existed'),
+              );
+        }
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Future.delayed(Duration(milliseconds: 300), () {
           Navigator.push(

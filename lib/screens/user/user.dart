@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/screens/cart/cart.dart';
 import 'package:ecommerce/screens/welcome/welcome.dart';
 import 'package:ecommerce/screens/wishlist/wishlist.dart';
 import 'package:ecommerce/services/firebase_authenticate.dart';
+import 'package:ecommerce/services/firebase_firestore.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/utils/helper_method.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +19,17 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
   final ScrollController _scrollController = ScrollController();
-  double top = 0.0;
+  double _top = 0.0;
   final AuthFirebase _auth = AuthFirebase();
   HelperMethod _helperMethod = HelperMethod();
+  final FireDatabase _fireDatabase = FireDatabase();
+
+  String _uid = '';
+  String? _name;
+  String _email = '';
+  String _joinedDate = '';
+  String? _imageUrl;
+  int? _phoneNumber;
 
   final List<IconData> _userListTileIcon = [
     Icons.favorite_rounded,
@@ -38,12 +48,28 @@ class _UserScreenState extends State<UserScreen> {
     _scrollController.addListener(() {
       setState(() {});
     });
+    _getData();
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  _getData() async {
+    final user = _auth.instance.currentUser;
+    final uid = user!.uid;
+    print(uid);
+    final userDoc = await _fireDatabase.getUserInfoByUID(uid);
+    print(userDoc);
+    setState(() {
+      _name = userDoc.get('name');
+      _email = userDoc.get('email');
+      _imageUrl = userDoc.get('imageUrl');
+      _joinedDate = userDoc.get('joinedDate');
+      _phoneNumber = userDoc.get('phoneNumber');
+    });
   }
 
   @override
@@ -63,7 +89,7 @@ class _UserScreenState extends State<UserScreen> {
                 pinned: true,
                 flexibleSpace: LayoutBuilder(
                   builder: (context, constraints) {
-                    top = constraints.biggest.height;
+                    _top = constraints.biggest.height;
                     return Container(
                       child: FlexibleSpaceBar(
                         collapseMode: CollapseMode.parallax,
@@ -71,7 +97,7 @@ class _UserScreenState extends State<UserScreen> {
                         title: Row(
                           children: [
                             AnimatedOpacity(
-                              opacity: top <= 125 ? 1 : 0,
+                              opacity: _top <= 125 ? 1 : 0,
                               duration: const Duration(milliseconds: 200),
                               child: Row(
                                 children: [
@@ -88,14 +114,17 @@ class _UserScreenState extends State<UserScreen> {
                                       ],
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
-                                          image: Image.asset(
-                                                  'assets/images/komkat.jpg')
-                                              .image,
+                                          image: _imageUrl == null
+                                              ? Image.asset(
+                                                      'assets/images/komkat.jpg',
+                                                      fit: BoxFit.fill)
+                                                  .image
+                                              : Image.network(_imageUrl!).image,
                                           fit: BoxFit.fill),
                                     ),
                                   ),
                                   Text(
-                                    'Kom Kat',
+                                    _name ?? _email,
                                     style: GoogleFonts.poppins(
                                       fontSize: 20,
                                       color: kwhite,
@@ -106,10 +135,15 @@ class _UserScreenState extends State<UserScreen> {
                             ),
                           ],
                         ),
-                        background: Image.asset(
-                          'assets/images/komkat.jpg',
-                          fit: BoxFit.cover,
-                        ),
+                        background: _imageUrl == null
+                            ? Image.asset(
+                                'assets/images/komkat.jpg',
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                _imageUrl!,
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     );
                   },
@@ -162,11 +196,12 @@ class _UserScreenState extends State<UserScreen> {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    userListTile('Email', 2, subtitle: 'email sub'),
-                    userListTile('Phone Number', 3, subtitle: 'phone sub'),
+                    userListTile('Email', 2, subtitle: _email),
+                    userListTile('Phone Number', 3,
+                        subtitle: _phoneNumber?.toString() ?? 'No'),
                     userListTile('Shipping address', 4,
                         subtitle: 'address sub'),
-                    userListTile('Joined Day', 5, subtitle: 'day sub'),
+                    userListTile('Joined Day', 5, subtitle: _joinedDate),
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 15.0, top: 20, bottom: 5),

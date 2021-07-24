@@ -21,10 +21,10 @@ class InitState extends StatelessWidget {
           );
         } else if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
-            print('logined');
+            print('bottombar');
             return BottomBarScreen();
           } else {
-            print('logout');
+            print('welcome_screen');
             return WelcomeScreen();
           }
         } else

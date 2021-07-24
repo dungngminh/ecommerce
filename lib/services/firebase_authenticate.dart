@@ -48,7 +48,7 @@ class AuthFirebase {
     }
   }
 
-  Future<String?> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle() async {
     final googleSignIn = GoogleSignIn();
     final googleAccount = await googleSignIn.signIn();
     if (googleAccount != null) {
@@ -60,8 +60,8 @@ class AuthFirebase {
                 accessToken: googleAuth.accessToken,
                 idToken: googleAuth.idToken),
           );
-          print(result);
-          return 'Logged in with ${result.additionalUserInfo!.profile!['email']}';
+          // return 'Logged in with ${result.additionalUserInfo!.profile!['email']}';
+          return result;
         } catch (error) {
           return null;
         }
