@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   backdrop: ^0.6.2
   badges: ^2.0.1
+  cached_network_image: ^3.1.0
   carousel_slider: ^4.0.0
   cloud_firestore: ^2.4.0
   cupertino_icons: ^1.0.2

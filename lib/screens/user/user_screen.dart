@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/screens/cart/cart.dart';
@@ -8,6 +9,7 @@ import 'package:ecommerce/services/firebase_firestore.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/utils/helper_method.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +30,7 @@ class _UserScreenState extends State<UserScreen> {
   String? _name;
   String _email = '';
   String _joinedDate = '';
-  String? _imageUrl;
+  String? _imageUrl = '';
   int? _phoneNumber;
 
   final List<IconData> _userListTileIcon = [
@@ -44,11 +46,11 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   void initState() {
-    _getData();
     super.initState();
     _scrollController.addListener(() {
       setState(() {});
     });
+    _getData();
   }
 
   @override
@@ -135,14 +137,24 @@ class _UserScreenState extends State<UserScreen> {
                             ),
                           ],
                         ),
-                        background: _imageUrl == null
-                            ? Image.asset(
-                                'assets/images/komkat.jpg',
+                        background: _imageUrl == ''
+                            ? SvgPicture.asset(
+                                'assets/icons/guest.svg',
                                 fit: BoxFit.cover,
                               )
-                            : Image.network(
-                                _imageUrl!,
+                            : CachedNetworkImage(
+                                imageUrl: _imageUrl!,
                                 fit: BoxFit.cover,
+                                placeholder: (context, url) {
+                                  return Center(
+                                    child: Text(
+                                      'LOADING',
+                                      style: GoogleFonts.poppins(
+                                        color: kwhite,
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                       ),
                     );
@@ -211,10 +223,13 @@ class _UserScreenState extends State<UserScreen> {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    userListTile('Dark Mode', 6,
-                        subtitle: 'Turn on/off dark mode',
-                        isSwitchTitle: true,
-                        provider: themeChange),
+                    userListTile(
+                      'Dark Mode',
+                      6,
+                      subtitle: 'Turn on/off dark mode',
+                      isSwitchTitle: true,
+                      provider: themeChange,
+                    ),
                     userListTile('Sign Out', 7, subtitle: 'Log out',
                         navigator: () {
                       _helperMethod.showAlertDialog(

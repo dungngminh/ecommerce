@@ -48,6 +48,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    print('main call');
     return FutureBuilder<Object>(
       future: _initialization,
       builder: (context, snapshot) {
