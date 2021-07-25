@@ -10,7 +10,6 @@ import 'package:ecommerce/screens/authen/widget/social_linking.dart';
 import 'package:ecommerce/services/firebase_authenticate.dart';
 import 'package:ecommerce/services/firebase_firestore.dart';
 import 'package:ecommerce/utils/constant.dart';
-import 'package:ecommerce/screens/main_screen/widget/bottombar.dart';
 import 'package:ecommerce/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
