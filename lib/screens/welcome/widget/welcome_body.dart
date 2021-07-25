@@ -1,6 +1,6 @@
 import 'package:ecommerce/provider/dark_theme_provider.dart';
-import 'package:ecommerce/screens/authen/login_screen.dart';
-import 'package:ecommerce/screens/authen/signup_screen.dart';
+import 'package:ecommerce/screens/authen/public/plc_login_screen.dart';
+import 'package:ecommerce/screens/authen/public/plc_signup_screen.dart';
 import 'package:ecommerce/screens/welcome/widget/welcome_background.dart';
 import 'package:ecommerce/widget/button.dart';
 import 'package:ecommerce/utils/constant.dart';
@@ -41,13 +41,13 @@ class WelcomeBody extends StatelessWidget {
             ButtonWidget(
               text: 'LOG IN',
               onPressed: () =>
-                  Navigator.pushNamed(context, LoginScreen.routeName),
+                  Navigator.pushNamed(context, PublicLoginScreen.routeName),
               textColor: kPrimaryLightColor,
             ),
             ButtonWidget(
               text: 'SIGN UP',
               onPressed: () =>
-                  Navigator.pushNamed(context, SignUpScreen.routeName),
+                  Navigator.pushNamed(context, PublicSignUpScreen.routeName),
               color: kPrimaryLightColor,
               textColor: kPrimaryColor,
             ),

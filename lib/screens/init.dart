@@ -1,6 +1,6 @@
+import 'package:ecommerce/screens/main_screen/main_screen.dart';
 import 'package:ecommerce/screens/welcome/welcome.dart';
 import 'package:ecommerce/utils/constant.dart';
-import 'package:ecommerce/widget/bottombar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -21,8 +21,8 @@ class InitState extends StatelessWidget {
           );
         } else if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
-            print('bottombar');
-            return BottomBarScreen();
+            print(snapshot.data.toString() + ' main screen');
+            return MainScreen();
           } else {
             print('welcome_screen');
             return WelcomeScreen();

@@ -44,11 +44,11 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   void initState() {
+    _getData();
     super.initState();
     _scrollController.addListener(() {
       setState(() {});
     });
-    _getData();
   }
 
   @override
@@ -58,7 +58,7 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   _getData() async {
-    final user = _auth.instance.currentUser;
+    final user = _auth.getCurrentUser; //add function for getting current user
     final uid = user!.uid;
     print(uid);
     final userDoc = await _fireDatabase.getUserInfoByUID(uid);

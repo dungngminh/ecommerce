@@ -1,15 +1,16 @@
 import 'package:ecommerce/provider/dark_theme_provider.dart';
-import 'package:ecommerce/screens/authen/signup_screen.dart';
+import 'package:ecommerce/screens/authen/public/plc_signup_screen.dart';
 import 'package:ecommerce/screens/authen/widget/custom_divider.dart';
 import 'package:ecommerce/screens/authen/widget/email_field.dart';
-import 'package:ecommerce/screens/authen/widget/check_account_status.dart';
+import 'package:ecommerce/screens/main_screen/main_screen.dart';
+import 'package:ecommerce/widget/check_account_status.dart';
 import 'package:ecommerce/screens/authen/widget/login_background.dart';
 import 'package:ecommerce/screens/authen/widget/password_field.dart';
 import 'package:ecommerce/screens/authen/widget/social_linking.dart';
 import 'package:ecommerce/services/firebase_authenticate.dart';
 import 'package:ecommerce/services/firebase_firestore.dart';
 import 'package:ecommerce/utils/constant.dart';
-import 'package:ecommerce/widget/bottombar.dart';
+import 'package:ecommerce/screens/main_screen/widget/bottombar.dart';
 import 'package:ecommerce/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -56,13 +57,8 @@ class _LoginBodyState extends State<LoginBody> {
         } else {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
           Future.delayed(Duration(milliseconds: 300), () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BottomBarScreen(),
-              ),
-            );
-          });
+          Navigator.pushNamed(context, MainScreen.routeName);
+        });
         }
       } finally {
         setState(() {
@@ -102,7 +98,7 @@ class _LoginBodyState extends State<LoginBody> {
       if (resultUser.user!.email == null) {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else {
-        final _uid = _auth.instance.currentUser!.uid;
+        final _uid = _auth.getCurrentUser!.uid;
         final isExist = await _db.isExistInFirestore(_uid);
         print(isExist ? 'ton tai' : 'ko');
         print(_uid);
@@ -124,12 +120,7 @@ class _LoginBodyState extends State<LoginBody> {
         }
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Future.delayed(Duration(milliseconds: 300), () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BottomBarScreen(),
-            ),
-          );
+          Navigator.pushNamed(context, MainScreen.routeName);
         });
       }
     } finally {
@@ -206,7 +197,7 @@ class _LoginBodyState extends State<LoginBody> {
             CheckHavingAccountStatus(
               darkMode: themeProvider.darkTheme,
               function: () =>
-                  Navigator.pushNamed(context, SignUpScreen.routeName),
+                  Navigator.pushNamed(context, PublicSignUpScreen.routeName),
             ),
             CustomDividerWidget(
               darkMode: themeProvider.darkTheme,

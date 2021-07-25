@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/provider/dark_theme_provider.dart';
-import 'package:ecommerce/screens/authen/login_screen.dart';
-import 'package:ecommerce/screens/authen/widget/check_account_status.dart';
+import 'package:ecommerce/screens/authen/public/plc_login_screen.dart';
+import 'package:ecommerce/screens/main_screen/main_screen.dart';
+import 'package:ecommerce/widget/check_account_status.dart';
 import 'package:ecommerce/screens/authen/widget/custom_divider.dart';
 import 'package:ecommerce/screens/authen/widget/email_field.dart';
 import 'package:ecommerce/screens/authen/widget/password_field.dart';
@@ -13,7 +13,7 @@ import 'package:ecommerce/services/firebase_authenticate.dart';
 import 'package:ecommerce/services/firebase_dbStorage.dart';
 import 'package:ecommerce/services/firebase_firestore.dart';
 import 'package:ecommerce/utils/constant.dart';
-import 'package:ecommerce/widget/bottombar.dart';
+import 'package:ecommerce/screens/main_screen/widget/bottombar.dart';
 import 'package:ecommerce/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -66,7 +66,7 @@ class _SignUpBodyState extends State<SignUpBody> {
           final imageUrl = await _storage.saveImageToStorage(
               folder: 'userImage', name: _emailInput, file: _pickedImage);
           print(imageUrl);
-          final _uid = _auth.instance.currentUser!.uid;
+          final _uid = _auth.getCurrentUser!.uid;
           print(_uid);
           _db
               .addUser(
@@ -81,7 +81,7 @@ class _SignUpBodyState extends State<SignUpBody> {
           Future.delayed(
             Duration(milliseconds: 500),
             () {
-              Navigator.pushNamed(context, LoginScreen.routeName);
+              Navigator.pushNamed(context, PublicLoginScreen.routeName);
             },
           );
         }
@@ -123,7 +123,8 @@ class _SignUpBodyState extends State<SignUpBody> {
       if (resultUser.user!.email == null) {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else {
-        final _uid = _auth.instance.currentUser!.uid;
+        final user = _auth.getCurrentUser;
+        final _uid = user!.uid;
         final isExist = await _db.isExistInFirestore(_uid);
         print(isExist ? 'ton tai' : 'ko');
         print(_uid);
@@ -138,19 +139,12 @@ class _SignUpBodyState extends State<SignUpBody> {
                 joinedDate: formatDate,
                 createAt: DateTime.now(),
               )
-              .then(
-                (value) => print(
-                    value ? 'add google ok' : 'add google false or existed'),
-              );
+              .then((value) => print(value))
+              .onError((error, stackTrace) => print('fail'));
         }
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Future.delayed(Duration(milliseconds: 300), () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BottomBarScreen(),
-            ),
-          );
+          Navigator.pushNamed(context, MainScreen.routeName);
         });
       }
     } finally {
@@ -284,7 +278,7 @@ class _SignUpBodyState extends State<SignUpBody> {
               darkMode: themeProvider.darkTheme,
               function: () => Navigator.pushNamed(
                 context,
-                LoginScreen.routeName,
+                PublicLoginScreen.routeName,
               ),
               type: false,
             ),

@@ -1,3 +1,4 @@
+import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class SignUpBackground extends StatelessWidget {
@@ -35,6 +36,19 @@ class SignUpBackground extends StatelessWidget {
             ),
           ),
           child,
+          Positioned(
+            top: 20,
+            left: 10,
+            child: IconButton(
+              splashRadius: 20,
+              icon: Icon(
+                Icons.arrow_back,
+                size: 30,
+                color: kPrimaryColor,
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
         ],
       ),
     );

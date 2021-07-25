@@ -1,3 +1,5 @@
+import 'package:ecommerce/screens/welcome/welcome.dart';
+import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class LoginBackground extends StatelessWidget {
@@ -31,6 +33,19 @@ class LoginBackground extends StatelessWidget {
             ),
           ),
           child,
+          Positioned(
+            top: 20,
+            left: 10,
+            child: IconButton(
+              splashRadius: 20,
+              icon: Icon(
+                Icons.arrow_back,
+                size: 30,
+                color: kPrimaryColor,
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
         ],
       ),
     );
