@@ -1,16 +1,73 @@
-# ecommerce
+# Ecommerce App
 
-In develop
+A ecommerce app using Flutter, Firebase for backend and Stripe for payment module
 
-## Getting Started
+In development (The project was delayed from July 26 due to exam preparation reasons)
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- Flutter using Provider for state management
+- Firebase authentication, Firestore, Firebase Storage
+- Stripe package in payment module
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Directory structure
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+project
+│   README.md
+│
+└───assets
+│
+│
+└───lib
+│   └───screens                 <- [UI]
+│   │   │   ...
+│   │   │   ...
+│   │
+│   └───models                  <- [Model]
+│   |    │   ...
+│   |    │   ...
+│   |
+|   └───provider                <- [Provider]
+│   |    │   ...
+│   |    │   ...
+│   |
+|   └───services                <- [Service]
+│   |    │   firebase_authentication <- [for auth module]
+│   |    │   firebase_storage  <- [for storing images]
+|   │    |   firebase_firestore <- [for storing information]
+│   |
+|   └───ultis                   <- [Support fille (theme, setting,..]
+│   |    │   ...
+│   |    │   ...
+│   |
+|   └───widget                  <-[reused widget]
+│   |    │   ...
+│   |    │   ...
+│   |
+└───screenshots
+    |    │   ...
+    |    │   ...
+    │   ...
+```
+
+## Screenshots
+
+### (update to 26/7/2021, some new photos will be updated later, sorry for not fully updated)
+
+|                                 |                                  |
+| :-----------------------------: | :------------------------------: |
+|   ![](screenshots/login.png)    |   ![](screenshots/signup.png)    |
+| ![](screenshots/home_light.png) | ![](screenshots/home2_light.png) |
+| ![](screenshots/home_dark.png)  | ![](screenshots/home2_dark.png)  |
+|  ![](screenshots/feed_all.png)  |  ![](screenshots/feed_cate.png)  |
+|    ![](screenshots/cart.png)    |   ![](screenshots/detail.png)    |
+|  ![](screenshots/favorite.png)  |    ![](screenshots/user.png)     |
+
+## Contributors ✨
+
+<table>
+  <tr>
+    <td align="center"><a> <img src="https://avatars.githubusercontent.com/u/63831488?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nguyễn Minh Dũng</b></sub></a><br /><a href="https://github.com/dungngminh/ecommerce/commits?author=dungngminh" title="Code">💻</a> <a href="https://github.com/dungngminh/ecommerce/commits?author=dungngminh" title="Documentation">📖</a> <a 
+  </tr>
+</table>
