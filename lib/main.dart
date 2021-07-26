@@ -17,6 +17,7 @@ import 'package:ecommerce/screens/user/user_screen.dart';
 import 'package:ecommerce/screens/welcome/welcome.dart';
 import 'package:ecommerce/screens/wishlist/wishlist.dart';
 import 'package:ecommerce/utils/constant.dart';
+import 'package:ecommerce/utils/settings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,15 +36,22 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   DarkThemeProvider _themeProvider = DarkThemeProvider();
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  final Setting _setting = Setting();
+  bool _isLogin = false;
 
   @override
   void initState() {
     getCurrentAppTheme();
+    _getStatus();
     super.initState();
   }
 
   Future getCurrentAppTheme() async {
     _themeProvider.darkTheme = await _themeProvider.setting.getTheme();
+  }
+
+  _getStatus() async {
+    _isLogin = await _setting.getStatus();
   }
 
   @override
@@ -107,7 +115,8 @@ class _MyAppState extends State<MyApp> {
                 debugShowCheckedModeBanner: false,
                 initialRoute: InitState.routeName,
                 routes: {
-                  InitState.routeName: (context) => InitState(),
+                  InitState.routeName: (context) =>
+                      InitState(isLogin: _isLogin),
                   WelcomeScreen.routeName: (context) => WelcomeScreen(),
                   PublicLoginScreen.routeName: (context) => PublicLoginScreen(),
                   PublicSignUpScreen.routeName: (context) =>

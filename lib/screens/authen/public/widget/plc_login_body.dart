@@ -3,6 +3,7 @@ import 'package:ecommerce/screens/authen/public/plc_signup_screen.dart';
 import 'package:ecommerce/screens/authen/widget/custom_divider.dart';
 import 'package:ecommerce/screens/authen/widget/email_field.dart';
 import 'package:ecommerce/screens/main_screen/main_screen.dart';
+import 'package:ecommerce/utils/settings.dart';
 import 'package:ecommerce/widget/check_account_status.dart';
 import 'package:ecommerce/screens/authen/widget/login_background.dart';
 import 'package:ecommerce/screens/authen/widget/password_field.dart';
@@ -29,6 +30,7 @@ class _LoginBodyState extends State<LoginBody> {
   //authen
   final _auth = AuthFirebase();
   final _db = FireDatabase();
+  final _setting = Setting();
 
   _submit() async {
     FocusScope.of(context).unfocus();
@@ -48,16 +50,17 @@ class _LoginBodyState extends State<LoginBody> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          behavior: SnackBarBehavior.floating,
+
           backgroundColor: Colors.white,
         );
         if (result != null) {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         } else {
+          _setting.saveStatus(true);
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          Future.delayed(Duration(milliseconds: 300), () {
-          Navigator.pushNamed(context, MainScreen.routeName);
-        });
+          Future.delayed(Duration(milliseconds: 500), () {
+            Navigator.pushNamed(context, MainScreen.routeName);
+          });
         }
       } finally {
         setState(() {
@@ -91,7 +94,6 @@ class _LoginBodyState extends State<LoginBody> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.white,
       );
       if (resultUser.user!.email == null) {
@@ -117,6 +119,8 @@ class _LoginBodyState extends State<LoginBody> {
                     value ? 'add google ok' : 'add google false or existed'),
               );
         }
+          _setting.saveStatus(true);
+
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Future.delayed(Duration(milliseconds: 300), () {
           Navigator.pushNamed(context, MainScreen.routeName);

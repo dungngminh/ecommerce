@@ -123,17 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Theme.of(context).textSelectionTheme.selectionColor,
                     ),
                   ),
-                  customInkWel(
-                    onTap: () {},
-                    child: Text(
-                      'View more...',
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16,
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
+                  
                 ],
               ),
             ),

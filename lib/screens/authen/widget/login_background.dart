@@ -1,6 +1,8 @@
-import 'package:ecommerce/screens/welcome/welcome.dart';
+
+import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginBackground extends StatelessWidget {
   final Widget child;
@@ -10,6 +12,7 @@ class LoginBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final darkMode = Provider.of<DarkThemeProvider>(context).darkTheme;
     return Container(
       height: size.height,
       width: double.infinity,
@@ -41,7 +44,7 @@ class LoginBackground extends StatelessWidget {
               icon: Icon(
                 Icons.arrow_back,
                 size: 30,
-                color: kPrimaryColor,
+                color: darkMode?kPrimaryLightColor:kPrimaryColor,
               ),
               onPressed: () => Navigator.pop(context),
             ),

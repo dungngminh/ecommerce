@@ -8,6 +8,8 @@ import 'package:ecommerce/services/firebase_authenticate.dart';
 import 'package:ecommerce/services/firebase_firestore.dart';
 import 'package:ecommerce/utils/constant.dart';
 import 'package:ecommerce/utils/helper_method.dart';
+import 'package:ecommerce/utils/settings.dart';
+import 'package:ecommerce/widget/inkwel_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,8 +27,8 @@ class _UserScreenState extends State<UserScreen> {
   final AuthFirebase _auth = AuthFirebase();
   HelperMethod _helperMethod = HelperMethod();
   final FireDatabase _fireDatabase = FireDatabase();
+  final Setting _setting = Setting();
 
-  String _uid = '';
   String? _name;
   String _email = '';
   String _joinedDate = '';
@@ -42,6 +44,7 @@ class _UserScreenState extends State<UserScreen> {
     Icons.watch_later,
     Icons.dark_mode,
     Icons.exit_to_app,
+    Icons.badge,
   ];
 
   @override
@@ -145,16 +148,6 @@ class _UserScreenState extends State<UserScreen> {
                             : CachedNetworkImage(
                                 imageUrl: _imageUrl!,
                                 fit: BoxFit.cover,
-                                placeholder: (context, url) {
-                                  return Center(
-                                    child: Text(
-                                      'LOADING',
-                                      style: GoogleFonts.poppins(
-                                        color: kwhite,
-                                      ),
-                                    ),
-                                  );
-                                },
                               ),
                       ),
                     );
@@ -200,14 +193,20 @@ class _UserScreenState extends State<UserScreen> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 15.0, top: 10, bottom: 5),
-                      child: userTile('User Infomation'),
+                      padding: const EdgeInsets.only(
+                          left: 15.0, top: 10, bottom: 5, right: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          userTile('User Infomation'),
+                        ],
+                      ),
                     ),
                     const Divider(
                       thickness: 1,
                       color: Colors.grey,
                     ),
+                    userListTile('Name', 8, subtitle: _name ?? 'No'),
                     userListTile('Email', 2, subtitle: _email),
                     userListTile('Phone Number', 3,
                         subtitle: _phoneNumber?.toString() ?? 'No'),
@@ -230,16 +229,25 @@ class _UserScreenState extends State<UserScreen> {
                       isSwitchTitle: true,
                       provider: themeChange,
                     ),
-                    userListTile('Sign Out', 7, subtitle: 'Log out',
-                        navigator: () {
-                      _helperMethod.showAlertDialog(
-                          title: 'Sign Out',
-                          callBackFunc: () {
-                            _auth.signOut().then((value) => Navigator.pushNamed(
-                                context, WelcomeScreen.routeName));
-                          },
-                          context: context);
-                    }),
+                    userListTile(
+                      'Sign Out',
+                      7,
+                      subtitle: 'Log out',
+                      navigator: () {
+                        _helperMethod.showAlertDialog(
+                            title: 'Sign Out',
+                            callBackFunc: () {
+                              _setting.saveStatus(false);
+                              _auth.signOut().then((value) =>
+                                  Navigator.pushNamed(
+                                      context, WelcomeScreen.routeName));
+                            },
+                            context: context);
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),

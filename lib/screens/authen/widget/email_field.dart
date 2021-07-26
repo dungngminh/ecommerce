@@ -22,6 +22,9 @@ class EmailField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFieldWidget(
       child: TextFormField(
+        style: TextStyle(
+          color: kPrimaryColor,
+        ),
         textInputAction: TextInputAction.next,
         validator: (value) {
           return RegExp(

@@ -39,7 +39,7 @@ class EmptyWishlist extends StatelessWidget {
               color: themeChange.darkTheme
                   ? Theme.of(context).textSelectionTheme.selectionColor
                   : Colors.black87,
-              fontSize: 34,
+              fontSize: 30,
               fontWeight: FontWeight.w900,
             ),
           ),

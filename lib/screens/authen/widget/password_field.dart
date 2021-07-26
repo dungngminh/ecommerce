@@ -39,6 +39,9 @@ class _PasswordFieldState extends State<PasswordField> {
           TextFormField(
             textInputAction: widget.nextAction,
             obscureText: _isHidePass,
+            style: TextStyle(
+              color: kPrimaryColor,
+            ),
             validator: (value) {
               return widget.password == null
                   ? (value!.length < 8 ? 'Password must >=8 characters' : null)
@@ -52,7 +55,7 @@ class _PasswordFieldState extends State<PasswordField> {
               border: InputBorder.none,
               hintText: widget.isRepeat ? 'Repeat Password ' : 'Password',
               hintStyle: GoogleFonts.poppins(
-                color: kPrimaryColor ,
+                color: kPrimaryColor,
               ),
               icon: Icon(
                 Icons.lock,

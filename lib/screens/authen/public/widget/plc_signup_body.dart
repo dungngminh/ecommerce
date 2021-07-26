@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ecommerce/provider/dark_theme_provider.dart';
 import 'package:ecommerce/screens/authen/public/plc_login_screen.dart';
 import 'package:ecommerce/screens/main_screen/main_screen.dart';
+import 'package:ecommerce/utils/settings.dart';
 import 'package:ecommerce/widget/check_account_status.dart';
 import 'package:ecommerce/screens/authen/widget/custom_divider.dart';
 import 'package:ecommerce/screens/authen/widget/email_field.dart';
@@ -35,6 +36,7 @@ class _SignUpBodyState extends State<SignUpBody> {
   final AuthFirebase _auth = AuthFirebase();
   final FireDatabase _db = FireDatabase();
   final StorageFirebase _storage = StorageFirebase();
+  final _setting = Setting();
 
   _signUp() async {
     var date = DateTime.now().toString();
@@ -57,7 +59,6 @@ class _SignUpBodyState extends State<SignUpBody> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.white,
         );
         if (result != null) {
@@ -117,7 +118,6 @@ class _SignUpBodyState extends State<SignUpBody> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.white,
       );
       if (resultUser.user!.email == null) {
@@ -142,6 +142,8 @@ class _SignUpBodyState extends State<SignUpBody> {
               .then((value) => print(value))
               .onError((error, stackTrace) => print('fail'));
         }
+        _setting.saveStatus(true);
+
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Future.delayed(Duration(milliseconds: 300), () {
           Navigator.pushNamed(context, MainScreen.routeName);
