@@ -34,7 +34,7 @@ project
 │   |
 |   └───services                <- [Service]
 │   |    │   firebase_authentication <- [for auth module]
-│   |    │   firebase_storage  <- [for storing images]
+│   |    │   firebase_storage  <- [for storing user images and product images]
 |   │    |   firebase_firestore <- [for storing information]
 │   |
 |   └───ultis                   <- [Support fille (theme, setting,..]
