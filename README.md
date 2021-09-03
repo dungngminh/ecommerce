@@ -4,6 +4,7 @@ A ecommerce app using Flutter, Firebase for backend and Stripe for payment modul
 
 In development
 
+
 ## Features
 
 - Flutter using Provider for state management
