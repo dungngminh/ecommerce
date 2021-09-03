@@ -2,7 +2,7 @@
 
 A ecommerce app using Flutter, Firebase for backend and Stripe for payment module and Login UI of The Flutter Way (Thank you! The Flutter Way)
 
-In development (The project was delayed from July 26 due to exam preparation reasons)
+In development
 
 ## Features
 
